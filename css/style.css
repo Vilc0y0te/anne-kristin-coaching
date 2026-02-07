@@ -318,8 +318,8 @@ section {
 
 .hero__split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4xl);
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: var(--space-3xl);
   align-items: center;
 }
 
@@ -329,6 +329,8 @@ section {
 
 .hero__visual {
   position: relative;
+  max-width: 320px;
+  margin-left: auto;
 }
 
 .hero__image {
@@ -1108,7 +1110,7 @@ section {
   margin: calc(-1 * var(--space-2xl)) calc(-1 * var(--space-2xl)) var(--space-lg);
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  max-height: 180px;
 }
 
 .offer-card__image img {
