@@ -259,19 +259,15 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(el);
   });
 
-  // --- Parallax on scroll for hero images ---
-  const parallaxElements = document.querySelectorAll('.hero__image, .magazine__feature-image img');
-  if (parallaxElements.length > 0) {
+  // --- Parallax on scroll for hero image only ---
+  const heroImg = document.querySelector('.hero__image');
+  if (heroImg) {
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      parallaxElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.bottom > 0 && rect.top < window.innerHeight) {
-          const speed = 0.08;
-          const offset = scrollY * speed;
-          el.style.transform = `translateY(${offset}px)`;
-        }
-      });
+      const rect = heroImg.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const offset = window.scrollY * 0.06;
+        heroImg.style.transform = `translateY(${offset}px)`;
+      }
     }, { passive: true });
   }
 
