@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with Anne-Kristin Vaudour. Book a free discovery call or send a message.">
+  <title>Contact | Anne-Kristin Vaudour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Anne-Kristin</a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="work-with-me.html" class="nav__link">Work With Me</a>
+        <a href="about.html" class="nav__link">About</a>
+        <a href="contact.html" class="nav__link nav__link--active">Contact</a>
+        <a href="contact.html#book" class="btn btn--primary nav__cta">Book a Call</a>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Get in Touch</span>
+      <h1>Let's start a conversation</h1>
+      <p>Whether you're ready to book or just have questions, I'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- Contact Grid -->
+  <section class="offers" style="padding-top: 0;">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <h3 style="margin-bottom: var(--space-xl);">Send a message</h3>
+          <form id="contactForm" aria-label="Contact form">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="First and last name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="interest">What are you interested in?</label>
+              <select id="interest" name="interest">
+                <option value="" disabled selected>Choose an option</option>
+                <option value="deep-dive">Deep Dive Coaching (3-month program)</option>
+                <option value="clarity">Single Clarity Session</option>
+                <option value="discovery">Free Discovery Call</option>
+                <option value="question">General Question</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell me a bit about what's going on</label>
+              <textarea id="message" name="message" placeholder="No need to have it all figured out. A few sentences about where you are and what you're looking for is enough." rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+            <p class="lead-form__note" style="margin-top: var(--space-md);">I typically respond within 24 hours.</p>
+          </form>
+        </div>
+
+        <!-- Contact Info + Book -->
+        <div class="contact-info">
+          <div id="book">
+            <h3>Book a free discovery call</h3>
+            <p style="margin-bottom: var(--space-xl);">The fastest way to get started. Pick a time that works for you, and we'll spend 30 minutes talking about where you are and how I can help.</p>
+
+            <!-- Calendly Placeholder -->
+            <div style="background: var(--color-bg-alt); border: 2px dashed var(--color-border); border-radius: var(--radius-md); padding: var(--space-3xl); text-align: center; margin-bottom: var(--space-3xl);">
+              <p style="font-weight: 600; color: var(--color-text); margin-bottom: var(--space-sm);">Calendly Widget</p>
+              <p style="font-size: var(--font-size-sm); margin-bottom: var(--space-md);">Your scheduling tool will be embedded here.</p>
+              <a href="#" class="btn btn--primary">Book on Calendly</a>
+            </div>
+          </div>
+
+          <div class="contact-info__item">
+            <div class="contact-info__icon">&#9993;</div>
+            <div>
+              <h4>Email</h4>
+              <p>hello@annekristinvaudour.com</p>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <div class="contact-info__icon">&#127760;</div>
+            <div>
+              <h4>Location</h4>
+              <p>Based in Singapore. Working globally via video call.</p>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <div class="contact-info__icon">&#128172;</div>
+            <div>
+              <h4>Languages</h4>
+              <p>English and German</p>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <div class="contact-info__icon">&#128337;</div>
+            <div>
+              <h4>Response time</h4>
+              <p>I reply to messages within 24 hours on business days.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Client Stories</span>
+        <h2>What clients say</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            I came in feeling completely lost after a decade in a career that wasn't mine. Within weeks, things started clicking. Anne-Kristin has this rare ability to ask the exact right question at the exact right time.
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">S.M.</div>
+            <div>
+              <div class="testimonial-card__name">Sarah M.</div>
+              <div class="testimonial-card__role">Marketing Director, Berlin</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            I didn't need someone to tell me what to do — I needed someone to help me hear what I already knew. That's exactly what this coaching gave me. I feel more like myself than I have in years.
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">J.L.</div>
+            <div>
+              <div class="testimonial-card__name">James L.</div>
+              <div class="testimonial-card__role">Entrepreneur, London</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            The sessions were challenging in the best way. Anne-Kristin creates this space where you feel safe enough to be honest — even about the things you've been hiding from yourself.
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">L.K.</div>
+            <div>
+              <div class="testimonial-card__name">Laura K.</div>
+              <div class="testimonial-card__role">Physician, Munich</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>The first step is always a conversation</h2>
+      <p>No pitch. No pressure. Just 30 minutes to explore whether coaching is the right move for you right now.</p>
+      <a href="#book" class="btn btn--primary btn--large" style="background:#fff; color: var(--color-accent);">Book Your Free Call</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">Anne-Kristin Vaudour</div>
+          <p>Jungian Coach &amp; Creative Visionary. Helping people navigate change, find clarity, and become the authors of their own stories.</p>
+        </div>
+        <div class="footer__nav">
+          <div class="footer__nav-group">
+            <h4>Navigate</h4>
+            <a href="index.html">Home</a>
+            <a href="work-with-me.html">Work With Me</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer__nav-group">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Imprint</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Anne-Kristin Vaudour. All rights reserved.</span>
+        <div class="footer__social">
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Podcast">Podcast</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
