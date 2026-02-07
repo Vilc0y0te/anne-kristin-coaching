@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Observe key elements for reveal animation
   const revealElements = document.querySelectorAll(
-    '.po-item, .method__step, .offer-card, .offer-detail, .testimonial-card, .value-card, .contact-info__item'
+    '.po-item, .method__step, .offer-card, .offer-detail, .testimonial-card, .value-card, .contact-info__item, .episode-card, .archetype-card, .insight-card'
   );
 
   revealElements.forEach(el => {
