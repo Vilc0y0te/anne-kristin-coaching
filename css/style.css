@@ -42,14 +42,14 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 4rem;
-  --space-4xl: 6rem;
-  --space-5xl: 8rem;
+  --space-4xl: 7rem;
+  --space-5xl: 10rem;
 
   /* Layout */
   --max-width: 1200px;
   --max-width-narrow: 800px;
   --max-width-text: 640px;
-  --nav-height: 72px;
+  --nav-height: 90px;
 
   /* Effects */
   --radius-sm: 4px;
@@ -80,7 +80,7 @@ html {
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -116,13 +116,15 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-  font-size: var(--font-size-3xl);
-  letter-spacing: -0.01em;
+  font-size: var(--font-size-4xl);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 h2 {
-  font-size: var(--font-size-2xl);
-  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-xl);
+  letter-spacing: -0.01em;
 }
 
 h3 {
@@ -139,12 +141,12 @@ p {
 
 .section-label {
   font-family: var(--font-body);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   color: var(--color-accent);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
   display: block;
 }
 
@@ -170,11 +172,12 @@ section {
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  padding: 14px 32px;
+  padding: 14px 36px;
   font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -222,10 +225,10 @@ section {
   left: 0;
   right: 0;
   height: var(--nav-height);
-  background: rgba(250, 250, 248, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border-light);
+  background: rgba(250, 250, 248, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: none;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -254,7 +257,7 @@ section {
 }
 
 .nav__logo-img {
-  height: 28px;
+  height: 60px;
   width: auto;
   display: block;
 }
@@ -262,15 +265,17 @@ section {
 .nav__links {
   display: flex;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-2xl);
 }
 
 .nav__link {
-  font-size: var(--font-size-sm);
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--color-text-light);
   transition: color var(--transition);
   position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .nav__link:hover,
@@ -1804,6 +1809,7 @@ section {
   :root {
     --space-5xl: 5rem;
     --space-4xl: 4rem;
+    --nav-height: 72px;
   }
 
   .container {
@@ -1832,6 +1838,10 @@ section {
 
   .nav__link {
     font-size: var(--font-size-lg);
+  }
+
+  .nav__logo-img {
+    height: 44px;
   }
 
   .nav__toggle {
@@ -1923,7 +1933,8 @@ section {
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: var(--font-size-xl); }
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
 
   .trust-bar__items {
     gap: var(--space-xl);
