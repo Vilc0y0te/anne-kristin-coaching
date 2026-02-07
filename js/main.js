@@ -51,54 +51,120 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Lead Form Handling ---
+  // --- Lead Form Handling (Netlify Forms) ---
   const leadForms = document.querySelectorAll('#leadForm');
 
   leadForms.forEach(form => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+
       const emailInput = form.querySelector('input[type="email"]');
       const email = emailInput ? emailInput.value : '';
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.textContent : 'Send';
 
-      if (email) {
-        // Replace form with success message
-        const parent = form.parentElement;
-        form.style.display = 'none';
-        const noteEl = parent.querySelector('.lead-form__note');
-        if (noteEl) noteEl.style.display = 'none';
+      if (!email) return;
 
-        const success = document.createElement('div');
-        success.style.cssText = 'padding: 16px 24px; background: #E8F0E8; border-radius: 8px; color: #4A7C59; font-weight: 500; display: inline-block;';
-        success.textContent = 'Thank you! Check your inbox for the guide.';
-        parent.appendChild(success);
-
-        // In production: send to ConvertKit/Mailchimp via API
-        console.log('Lead captured:', email);
+      // Show loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
       }
+
+      const formData = new FormData(form);
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(response => {
+        if (response.ok) {
+          const parent = form.parentElement;
+          form.style.display = 'none';
+          const noteEl = parent.querySelector('.lead-form__note');
+          if (noteEl) noteEl.style.display = 'none';
+
+          const success = document.createElement('div');
+          success.style.cssText = 'padding: 16px 24px; background: #E8F0E8; border-radius: 8px; color: #4A7C59; font-weight: 500; display: inline-block;';
+          success.textContent = 'Thank you! Check your inbox for the guide.';
+          parent.appendChild(success);
+        } else {
+          throw new Error('Server responded with ' + response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Lead form error:', error);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+        let errorMsg = form.querySelector('.form-error');
+        if (!errorMsg) {
+          errorMsg = document.createElement('p');
+          errorMsg.className = 'form-error';
+          errorMsg.style.cssText = 'color: #c0392b; font-size: 0.85rem; margin-top: 8px;';
+          form.appendChild(errorMsg);
+        }
+        errorMsg.textContent = 'Something went wrong. Please try again.';
+      });
     });
   });
 
-  // --- Contact Form Handling ---
+  // --- Contact Form Handling (Netlify Forms) ---
   const contactForm = document.getElementById('contactForm');
 
   if (contactForm) {
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : 'Send Message';
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
+      // Show loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+
       const formData = new FormData(contactForm);
-      const data = Object.fromEntries(formData.entries());
 
-      // Replace form with success message
-      contactForm.innerHTML = `
-        <div style="text-align: center; padding: var(--space-3xl) var(--space-xl);">
-          <div style="font-size: 2rem; margin-bottom: var(--space-md);">&#10003;</div>
-          <h3 style="margin-bottom: var(--space-sm);">Message sent!</h3>
-          <p style="color: var(--color-text-light);">Thank you for reaching out. I'll get back to you within 24 hours.</p>
-        </div>
-      `;
-
-      // In production: send to email service or CRM via API
-      console.log('Contact form submitted:', data);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(response => {
+        if (response.ok) {
+          // Replace form with success message
+          contactForm.innerHTML = `
+            <div style="text-align: center; padding: var(--space-3xl) var(--space-xl);">
+              <div style="font-size: 2.5rem; margin-bottom: var(--space-md); color: #4A7C59;">&#10003;</div>
+              <h3 style="margin-bottom: var(--space-sm);">Message sent!</h3>
+              <p style="color: var(--color-text-light);">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+            </div>
+          `;
+        } else {
+          throw new Error('Server responded with ' + response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Form submission error:', error);
+        // Show error state
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+        // Show inline error message
+        let errorMsg = contactForm.querySelector('.form-error');
+        if (!errorMsg) {
+          errorMsg = document.createElement('p');
+          errorMsg.className = 'form-error';
+          errorMsg.style.cssText = 'color: #c0392b; background: #fdf0ef; padding: 12px 16px; border-radius: 8px; margin-top: var(--space-md); font-size: 0.9rem;';
+          contactForm.appendChild(errorMsg);
+        }
+        errorMsg.textContent = 'Something went wrong. Please try again or email me directly at annek.vaudour@gmail.com';
+      });
     });
   }
 
