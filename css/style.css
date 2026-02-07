@@ -312,14 +312,29 @@ section {
 
 /* --- Hero --- */
 .hero {
-  padding-top: calc(var(--nav-height) + var(--space-5xl));
+  padding-top: calc(var(--nav-height) + var(--space-4xl));
   padding-bottom: var(--space-5xl);
-  text-align: center;
+}
+
+.hero__split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
 }
 
 .hero__content {
   max-width: var(--max-width-narrow);
-  margin: 0 auto;
+}
+
+.hero__visual {
+  position: relative;
+}
+
+.hero__image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 .hero h1 {
@@ -519,9 +534,7 @@ section {
 }
 
 .offer-card__badge {
-  position: absolute;
-  top: -12px;
-  left: var(--space-xl);
+  display: inline-block;
   background: var(--color-accent);
   color: var(--color-white);
   font-size: var(--font-size-xs);
@@ -530,6 +543,7 @@ section {
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  margin-bottom: var(--space-sm);
 }
 
 .offer-card h3 {
@@ -1087,6 +1101,76 @@ section {
 .contact-info__item p {
   font-size: var(--font-size-sm);
   margin-bottom: 0;
+}
+
+/* --- Offer Card Images --- */
+.offer-card__image {
+  margin: calc(-1 * var(--space-2xl)) calc(-1 * var(--space-2xl)) var(--space-lg);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.offer-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.offer-card:hover .offer-card__image img {
+  transform: scale(1.03);
+}
+
+/* --- Offer Detail Visual (full-width image above content) --- */
+.offer-detail__visual {
+  grid-column: 1 / -1;
+  margin: calc(-1 * var(--space-3xl)) calc(-1 * var(--space-3xl)) 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  max-height: 420px;
+}
+
+.offer-detail__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* --- Portrait Hero Full Image --- */
+.portrait-hero__full-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* --- Archetype Snapshot Feature --- */
+.archetype-snapshot-feature {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+  margin-top: var(--space-4xl);
+  padding: var(--space-3xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+}
+
+.archetype-snapshot-feature__image img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.archetype-snapshot-feature__content h3 {
+  font-size: var(--font-size-xl);
+}
+
+.archetype-snapshot-feature__content p {
+  line-height: 1.8;
 }
 
 /* --- Button Alignment Fixes --- */
@@ -1663,6 +1747,25 @@ section {
   .portrait-hero {
     grid-template-columns: 1fr;
   }
+
+  .hero__split {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero__visual {
+    order: -1;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .archetype-snapshot-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-detail__visual {
+    max-height: 300px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1721,8 +1824,20 @@ section {
   .offers__grid--three,
   .contact-grid,
   .about-story__content,
-  .portrait-hero {
+  .portrait-hero,
+  .hero__split,
+  .archetype-snapshot-feature {
     grid-template-columns: 1fr;
+  }
+
+  .hero__split {
+    text-align: center;
+  }
+
+  .hero__visual {
+    order: -1;
+    max-width: 360px;
+    margin: 0 auto;
   }
 
   .values-grid,
