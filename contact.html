@@ -8,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260207b">
+  <link rel="stylesheet" href="css/style.css?v=20260207c">
 </head>
 <body>
 
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav__inner">
-      <a href="index.html" class="nav__logo"><img src="images/logo.png?v=20260207b" alt="Anne-Kristin Vaudour Coaching & Consulting" class="nav__logo-img"></a>
+      <a href="index.html" class="nav__logo"><img src="images/logo.png?v=20260207c" alt="Anne-Kristin Vaudour Coaching & Consulting" class="nav__logo-img"></a>
       <div class="nav__links" id="navLinks">
         <a href="index.html" class="nav__link">Home</a>
         <a href="work-with-me.html" class="nav__link">Work With Me</a>
@@ -31,167 +31,95 @@
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <span class="section-label">Get in Touch</span>
-      <h1>Let's start a conversation</h1>
-      <p>Whether you're ready to book or just have questions, I'd love to hear from you.</p>
-    </div>
-  </section>
+  <!-- Contact Split Layout -->
+  <div class="contact-split">
 
-  <!-- Contact Grid -->
-  <section class="offers" style="padding-top: 0;">
-    <div class="container">
-      <div class="contact-grid">
-
-        <!-- Contact Form -->
-        <div class="contact-form">
-          <h3 style="margin-bottom: var(--space-xl);">Send a message</h3>
-          <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contact form">
-            <input type="hidden" name="form-name" value="contact">
-            <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-            <div class="form-group">
-              <label for="name">Your name</label>
-              <input type="text" id="name" name="name" placeholder="First and last name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-              <label for="interest">What are you interested in?</label>
-              <select id="interest" name="interest">
-                <option value="" disabled selected>Choose an option</option>
-                <option value="inner-landscape">3-Session Inner Landscape Journey</option>
-                <option value="portrait">Archetypal Portrait</option>
-                <option value="clarity">Single Clarity Session</option>
-                <option value="discovery">Free Discovery Call</option>
-                <option value="question">General Question</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="message">Tell me a bit about what's going on</label>
-              <textarea id="message" name="message" placeholder="No need to have it all figured out. A few sentences about where you are and what you're looking for is enough." rows="5"></textarea>
-            </div>
-            <button type="submit" class="btn btn--primary btn--full">Send Message</button>
-            <p class="lead-form__note" style="margin-top: var(--space-md);">I typically respond within 24 hours.</p>
-          </form>
-        </div>
-
-        <!-- Contact Info + Book -->
-        <div class="contact-info">
-          <div id="book">
-            <h3>Book a free discovery call</h3>
-            <p style="margin-bottom: var(--space-xl);">The fastest way to get started. Pick a time that works for you, and we'll spend 30 minutes talking about where you are and how I can help.</p>
-
-            <!-- Calendly Embed -->
-            <div class="calendly-inline-widget" data-url="https://calendly.com/annevaudour" style="min-width:280px;height:630px;margin-bottom:var(--space-3xl);border-radius:var(--radius-md);overflow:hidden;"></div>
-            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-          </div>
-
-          <div class="contact-info__item">
-            <div class="contact-info__icon">&#9993;</div>
-            <div>
-              <h4>Email</h4>
-              <p><a href="mailto:annek.vaudour@gmail.com">annek.vaudour@gmail.com</a></p>
-            </div>
-          </div>
-          <div class="contact-info__item">
-            <div class="contact-info__icon">&#128247;</div>
-            <div>
-              <h4>Instagram</h4>
-              <p><a href="https://www.instagram.com/annekristinvaudour/" target="_blank" rel="noopener">@annekristinvaudour</a></p>
-            </div>
-          </div>
-          <div class="contact-info__item">
-            <div class="contact-info__icon">&#128101;</div>
-            <div>
-              <h4>LinkedIn</h4>
-              <p><a href="https://www.linkedin.com/in/anne-kristin-vaudour-74869773/" target="_blank" rel="noopener">Anne-Kristin Vaudour</a></p>
-            </div>
-          </div>
-          <div class="contact-info__item">
-            <div class="contact-info__icon">&#127760;</div>
-            <div>
-              <h4>Location</h4>
-              <p>Based in Singapore. Working globally via video call.</p>
-            </div>
-          </div>
-          <div class="contact-info__item">
-            <div class="contact-info__icon">&#128172;</div>
-            <div>
-              <h4>Languages</h4>
-              <p>English, German &amp; Italian</p>
-            </div>
-          </div>
-          <div class="contact-info__item">
-            <div class="contact-info__icon">&#128337;</div>
-            <div>
-              <h4>Response time</h4>
-              <p>I reply to messages within 24 hours on business days.</p>
-            </div>
-          </div>
-        </div>
-
+    <!-- Left: Visual -->
+    <div class="contact-split__visual">
+      <img src="images/feed-portrait.jpg" alt="Archetypal portrait artwork by Anne-Kristin Vaudour">
+      <div class="contact-split__visual-overlay">
+        <h1>I would love to hear from you.</h1>
+        <p>Whether you are ready to begin or simply curious, let's start with a conversation.</p>
       </div>
     </div>
-  </section>
 
-  <!-- Testimonials Section -->
-  <section class="testimonials">
-    <div class="container">
+    <!-- Right: Form & Info -->
+    <div class="contact-split__main">
+
+      <!-- Contact Form -->
+      <div class="contact-split__form">
+        <h2>Send a message</h2>
+        <p>Share a few details and I will get back to you within 24 hours.</p>
+
+        <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contact form">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="interest">Interested in</label>
+            <select id="interest" name="interest">
+              <option value="" disabled selected>Choose an option</option>
+              <option value="inner-landscape">3-Session Inner Landscape Journey</option>
+              <option value="portrait">Archetypal Portrait</option>
+              <option value="clarity">Single Clarity Session</option>
+              <option value="discovery">Free Discovery Call</option>
+              <option value="workshop">Workshop or Guest Lecture</option>
+              <option value="question">General Question</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Your message</label>
+            <textarea id="message" name="message" placeholder="A few words about where you are and what you are looking for." rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-split__info">
+        <div class="contact-split__info-grid">
+          <div class="contact-split__info-item">
+            <h4>Email</h4>
+            <p><a href="mailto:annek.vaudour@gmail.com">annek.vaudour@gmail.com</a></p>
+          </div>
+          <div class="contact-split__info-item">
+            <h4>Location</h4>
+            <p>Singapore. Working globally.</p>
+          </div>
+          <div class="contact-split__info-item">
+            <h4>Social</h4>
+            <p>
+              <a href="https://www.linkedin.com/in/anne-kristin-vaudour-74869773/" target="_blank" rel="noopener">LinkedIn</a> &nbsp;&middot;&nbsp;
+              <a href="https://www.instagram.com/annekristinvaudour/" target="_blank" rel="noopener">Instagram</a>
+            </p>
+          </div>
+          <div class="contact-split__info-item">
+            <h4>Languages</h4>
+            <p>English, German, Italian</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Book a Call Section -->
+  <section class="offers" id="book" style="background: var(--color-bg);">
+    <div class="container" style="max-width: 720px;">
       <div class="text-center">
-        <span class="section-label">Client Stories</span>
-        <h2>What clients say</h2>
+        <span class="section-label">Free Discovery Call</span>
+        <h2>30 minutes. No pitch. Just clarity.</h2>
+        <p style="margin-bottom: var(--space-2xl);">Pick a time that works for you. We will talk about where you are and explore whether coaching is the right step.</p>
       </div>
-      <div class="testimonials__grid">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            I've had two wonderful sessions of Active Imagination with Anne, a practice rooted in Carl Jung's philosophy, and they've been deeply supportive in helping me access my own imagination and intuition. Anne creates a grounded, attuned space where the messages that arise truly resonate, not as something given from outside, but as something remembered from within.
-          </p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">&#10029;</div>
-            <div>
-              <div class="testimonial-card__name">Active Imagination Client</div>
-              <div class="testimonial-card__role"></div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            When I met Anne, I knew that my creative coaching experience would be truly transformative. Her empathy and deeply intuitive approach to coaching has enabled me to uncover parts of my true self and overcome creative blockages and fears that I didn't even realize were holding me back. Two of her greatest strengths are active listening and giving personalised insightful guidance, which has reignited my creative spark, something I had found difficult to reawaken for many years.
-          </p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">K.C.</div>
-            <div>
-              <div class="testimonial-card__name">Kelly C.</div>
-              <div class="testimonial-card__role">Writer</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            Anne's support has not only given me clarity but has also instilled a newfound confidence in my abilities. If you're looking for someone who genuinely understands the creative process in a safe and trusted space and can help you move past fear-based limitations, I cannot recommend Anne highly enough.
-          </p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">K.C.</div>
-            <div>
-              <div class="testimonial-card__name">Kelly C.</div>
-              <div class="testimonial-card__role">Writer</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>The first step is always a conversation</h2>
-      <p>No pitch. No pressure. Just 30 minutes to explore whether coaching is the right move for you right now.</p>
-      <a href="#book" class="btn btn--primary btn--large" style="background:#fff; color: var(--color-accent);">Book Your Free Call</a>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/annevaudour" style="min-width:280px;height:630px;border-radius:var(--radius-md);overflow:hidden;"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </section>
 
@@ -231,6 +159,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260207b"></script>
+  <script src="js/main.js?v=20260207c"></script>
 </body>
 </html>
