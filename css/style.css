@@ -253,6 +253,11 @@ section {
   color: var(--color-text);
 }
 
+.nav__logo-img {
+  height: 44px;
+  width: auto;
+}
+
 .nav__links {
   display: flex;
   align-items: center;
@@ -1686,6 +1691,30 @@ section {
   color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.insight-card--link {
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.insight-card--link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.insight-card--link h4 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.insight-card--link p {
+  font-style: normal;
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
 }
 
 /* --- Utility Classes --- */
