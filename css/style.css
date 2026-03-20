@@ -12,12 +12,12 @@
   --color-bg-dark: #1A1917;
   --color-bg-dark-alt: #141312;
   --color-text: #1A1917;
-  --color-text-light: #6B6862;
+  --color-text-light: #57544E;
   --color-text-inverse: #F7F5F0;
-  --color-accent: #9E7C4B;
-  --color-accent-hover: #866639;
-  --color-accent-light: rgba(158, 124, 75, 0.06);
-  --color-accent-soft: #B8A88E;
+  --color-accent: #7A5F39;
+  --color-accent-hover: #64502F;
+  --color-accent-light: rgba(122, 95, 57, 0.07);
+  --color-accent-soft: #A89575;
   --color-border: #D5CFC5;
   --color-border-light: #E5E0D8;
   --color-white: #FFFFFF;
@@ -47,8 +47,8 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 4rem;
-  --space-4xl: 5.5rem;
-  --space-5xl: 7rem;
+  --space-4xl: 4.5rem;
+  --space-5xl: 5.5rem;
 
   /* Layout */
   --max-width: 1200px;
@@ -124,7 +124,15 @@ h1, h2, h3, h4, h5 {
 
 h1 {
   font-size: clamp(2.25rem, 4vw, 3.25rem);
-  line-height: 1.12;
+  line-height: 1.22;
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 h2 {
@@ -146,10 +154,10 @@ p {
 
 .section-label {
   font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   color: var(--color-accent);
   margin-bottom: var(--space-md);
   display: block;
@@ -307,13 +315,13 @@ section {
 }
 
 .nav__link {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 400;
   color: var(--color-text-light);
   transition: color var(--transition);
   position: relative;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
 }
 
 .nav__link:hover,
@@ -801,15 +809,23 @@ section {
 
 .faq__icon {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-script);
-  font-size: 1.4rem;
-  transition: transform var(--transition);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 300;
+  transition: transform var(--transition), background var(--transition);
   color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+}
+
+.faq__question:hover .faq__icon {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
 }
 
 .faq__item.active .faq__icon {
@@ -2399,6 +2415,35 @@ section {
   }
 }
 
+/* No-JS fallback: make all elements visible if JS doesn't load */
+.no-js .reveal,
+.no-js .reveal-up,
+.no-js .reveal-left,
+.no-js .reveal-right,
+.no-js .reveal-scale {
+  opacity: 1;
+  transform: none;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-size-sm);
+  z-index: 10000;
+  border-radius: var(--radius-sm);
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: var(--space-md);
+  color: var(--color-text-inverse);
+}
+
 /* ============================================
    CONTACT PAGE — Elegant Split Layout
    ============================================ */
@@ -2426,11 +2471,15 @@ section {
 
 .contact-split__visual-overlay {
   position: absolute;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   padding: var(--space-3xl) var(--space-2xl);
-  background: linear-gradient(to top, rgba(26,25,23,0.92) 0%, rgba(26,25,23,0.65) 50%, rgba(26,25,23,0.15) 100%);
+  background: linear-gradient(to top, rgba(26,25,23,0.92) 0%, rgba(26,25,23,0.75) 40%, rgba(26,25,23,0.55) 100%);
   color: var(--color-text-inverse);
 }
 
@@ -2617,7 +2666,7 @@ section {
   left: 0;
   right: 0;
   padding: var(--space-4xl) var(--space-2xl) var(--space-3xl);
-  background: linear-gradient(to top, rgba(26,25,23,0.88) 0%, rgba(26,25,23,0.55) 45%, rgba(26,25,23,0.2) 75%, transparent 100%);
+  background: linear-gradient(to top, rgba(26,25,23,0.92) 0%, rgba(26,25,23,0.78) 35%, rgba(26,25,23,0.55) 60%, rgba(26,25,23,0.3) 80%, rgba(26,25,23,0.15) 100%);
 }
 
 .hero__fullwidth-overlay h1 {
