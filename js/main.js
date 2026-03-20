@@ -1,12 +1,11 @@
 /* ============================================
    ANNE-KRISTIN VAUDOUR — Main JavaScript
-   Mobile nav, FAQ accordion, form handling,
-   scroll animations, dynamic elements
+   Mobile nav, FAQ accordion, scroll animations
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- Mobile Navigation (Full-screen overlay) ---
+  // --- Mobile Navigation ---
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
 
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     });
 
-    navLinks.querySelectorAll('.nav__link').forEach(link => {
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navToggle.classList.remove('active');
         navLinks.classList.remove('active');
@@ -27,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- FAQ Accordion ---
-  const faqItems = document.querySelectorAll('.faq__item');
+  const faqItems = document.querySelectorAll('.faq-item');
 
   faqItems.forEach(item => {
-    const question = item.querySelector('.faq__question');
+    const question = item.querySelector('.faq-q');
     if (!question) return;
 
     question.addEventListener('click', () => {
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       faqItems.forEach(otherItem => {
         otherItem.classList.remove('active');
-        const btn = otherItem.querySelector('.faq__question');
+        const btn = otherItem.querySelector('.faq-q');
         if (btn) btn.setAttribute('aria-expanded', 'false');
       });
 
@@ -84,10 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================
-  //   DYNAMIC ELEMENTS — Scroll Animations
+  //   SCROLL ANIMATIONS
   // ============================================
 
-  // --- Scroll Reveal with stagger ---
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -100,35 +98,30 @@ document.addEventListener('DOMContentLoaded', () => {
     rootMargin: '0px 0px -80px 0px'
   });
 
-  // Apply reveal to all key elements
-  document.querySelectorAll(
-    '.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale'
-  ).forEach(el => {
+  // Observe all fade-up elements
+  document.querySelectorAll('.fade-up').forEach(el => {
     revealObserver.observe(el);
   });
 
-  // Auto-apply reveal classes to common elements
+  // Auto-apply fade-up to common elements
   const autoRevealSelectors = [
     '.po-item',
-    '.method__step',
-    '.offer-card',
+    '.step',
+    '.card',
     '.offer-detail',
-    '.testimonial-card',
-    '.value-card',
-    '.contact-info__item',
-    '.episode-card',
-    '.archetype-card',
+    '.testimonial',
     '.insight-card',
-    '.magazine__article',
-    '.magazine__feature',
-    '.magazine__theme',
-    '.faq__item',
-    '.contact-split__form',
-    '.contact-split__info'
+    '.magazine-article',
+    '.magazine-feature',
+    '.magazine-theme',
+    '.faq-item',
+    '.episode',
+    '.contact-info'
   ];
 
   document.querySelectorAll(autoRevealSelectors.join(', ')).forEach((el) => {
-    // Add staggered delay for grid items
+    if (el.classList.contains('fade-up')) return;
+
     const parent = el.parentElement;
     const siblings = parent ? Array.from(parent.children).filter(c =>
       c.matches(autoRevealSelectors.join(', '))
@@ -139,42 +132,32 @@ document.addEventListener('DOMContentLoaded', () => {
       el.style.transitionDelay = (siblingIndex * 0.12) + 's';
     }
 
-    el.classList.add('reveal-up');
+    el.classList.add('fade-up');
     revealObserver.observe(el);
   });
 
-  // --- Section headers: reveal with subtle slide ---
-  document.querySelectorAll('.page-header, section > .container > .text-center, .magazine__divider').forEach(el => {
-    el.classList.add('reveal');
-    revealObserver.observe(el);
+  // --- Section headers reveal ---
+  document.querySelectorAll('.section-header, .page-hero, .magazine-divider').forEach(el => {
+    if (!el.classList.contains('fade-up')) {
+      el.classList.add('fade-up');
+      revealObserver.observe(el);
+    }
   });
 
-  // --- Gold line accents: reveal ---
-  document.querySelectorAll('.gold-line').forEach(el => {
-    el.classList.add('reveal-scale');
-    revealObserver.observe(el);
-  });
-
-  // --- Parallax on scroll for hero image only ---
-  const heroImg = document.querySelector('.hero__image');
+  // --- Subtle parallax on hero image ---
+  const heroImg = document.querySelector('.hero-img');
   if (heroImg) {
     window.addEventListener('scroll', () => {
       const rect = heroImg.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < window.innerHeight) {
         const offset = window.scrollY * 0.04;
-        heroImg.style.transform = `translateY(${offset}px)`;
+        heroImg.style.transform = `translateY(${offset}px) scale(1.05)`;
       }
     }, { passive: true });
   }
 
-  // --- Horizontal line animation on scroll ---
-  document.querySelectorAll('.magazine__divider, .quote-banner').forEach(el => {
-    el.classList.add('reveal');
-    revealObserver.observe(el);
-  });
-
   // --- Number counter animation for trust bar ---
-  const counters = document.querySelectorAll('.trust-bar__number');
+  const counters = document.querySelectorAll('.trust-number');
   if (counters.length > 0) {
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -205,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(c => counterObserver.observe(c));
   }
 
-  // --- Smooth image hover tilt effect ---
-  document.querySelectorAll('.magazine__article-image, .offer-card__image').forEach(container => {
+  // --- Image hover tilt effect ---
+  document.querySelectorAll('.magazine-article-image, .card-img').forEach(container => {
     container.addEventListener('mousemove', (e) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
