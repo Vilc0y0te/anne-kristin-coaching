@@ -49,59 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Contact Form Handling (Netlify Forms) ---
-  const contactForm = document.getElementById('contactForm');
-
-  if (contactForm) {
-    const submitBtn = contactForm.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn ? submitBtn.textContent : 'Send Message';
-
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
-      }
-
-      const formData = new FormData(contactForm);
-
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
-      })
-      .then(response => {
-        if (response.ok) {
-          contactForm.innerHTML = `
-            <div style="text-align: center; padding: var(--space-3xl) var(--space-xl);">
-              <div style="font-size: 2.5rem; margin-bottom: var(--space-md); color: var(--color-accent);">&#10003;</div>
-              <h3 style="margin-bottom: var(--space-sm);">Message sent!</h3>
-              <p style="color: var(--color-text-light);">Thank you for reaching out. I'll get back to you within 24 hours.</p>
-            </div>
-          `;
-        } else {
-          throw new Error('Server responded with ' + response.status);
-        }
-      })
-      .catch(error => {
-        console.error('Form submission error:', error);
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalBtnText;
-        }
-        let errorMsg = contactForm.querySelector('.form-error');
-        if (!errorMsg) {
-          errorMsg = document.createElement('p');
-          errorMsg.className = 'form-error';
-          errorMsg.style.cssText = 'color: #c0392b; background: #fdf0ef; padding: 12px 16px; margin-top: var(--space-md); font-size: 0.9rem;';
-          contactForm.appendChild(errorMsg);
-        }
-        errorMsg.textContent = 'Something went wrong. Please try again or email me directly at annek.vaudour@gmail.com';
-      });
-    });
-  }
-
   // --- Smooth scroll for anchor links ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
