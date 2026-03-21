@@ -162,11 +162,11 @@ strong { font-weight: 600; color: var(--text); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 80px;
 }
 .nav-left { display: flex; align-items: center; gap: 2rem; }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo-img { height: 40px; width: auto; }
+.nav-logo-img { height: 70px; width: auto; }
 .nav-links-desktop { display: flex; align-items: center; gap: 1.75rem; }
 .nav-title {
   font-family: var(--font-heading);
@@ -302,27 +302,24 @@ strong { font-weight: 600; color: var(--text); }
    ============================================ */
 .swan-split {
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
 }
 .swan-img img {
   width: 100%;
   border-radius: var(--radius);
-  filter: grayscale(100%);
-  transition: filter 0.7s ease;
 }
-.swan-img:hover img { filter: grayscale(0%); }
 .swan-quote {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 500;
   line-height: 1.55;
   color: var(--text);
   margin-bottom: 1.5rem;
   font-style: italic;
 }
-.swan-text p { font-size: 0.9rem; }
+.swan-text p { font-size: 0.92rem; }
 
 /* ============================================
    IS THIS YOU — Pain vs Gain with visual contrast
@@ -726,6 +723,9 @@ strong { font-weight: 600; color: var(--text); }
   .nav-toggle.active span:nth-child(1) { top: 8px; transform: rotate(45deg); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+  .nav-inner { height: 64px; }
+  .nav-logo-img { height: 50px; }
 
   .hero-split { min-height: 70vh; }
   .hero-split-img { object-position: 30% center; }
