@@ -196,6 +196,11 @@ strong { font-weight: 500; }
   height: 100%;
   object-fit: cover;
   object-position: 60% center;
+  filter: grayscale(100%);
+  transition: filter 0.7s ease;
+}
+.hero-split-img:hover img {
+  filter: grayscale(0%);
 }
 
 .hero-split-text {
@@ -230,6 +235,11 @@ strong { font-weight: 500; }
 }
 .swan-img img {
   width: 100%;
+  filter: grayscale(100%);
+  transition: filter 0.7s ease;
+}
+.swan-img:hover img {
+  filter: grayscale(0%);
 }
 .swan-quote {
   font-family: var(--font-heading);
@@ -322,9 +332,10 @@ strong { font-weight: 500; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s;
+  filter: grayscale(100%);
+  transition: filter 0.7s ease, transform 0.7s ease;
 }
-.offer-card:hover .offer-card-img img { transform: scale(1.05); }
+.offer-card:hover .offer-card-img img { filter: grayscale(0%); transform: scale(1.05); }
 
 .offer-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
 .offer-card p { font-size: 0.85rem; margin-bottom: 1rem; }
