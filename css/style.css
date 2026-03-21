@@ -260,7 +260,7 @@ em { font-style: italic; }
 .text-link:hover { color: var(--on-surface); border-color: var(--on-surface); }
 
 /* ============================================
-   NAVIGATION — Glassmorphism
+   NAVIGATION — Centered logo, Home+menu left, CTA right
    ============================================ */
 .nav {
   position: fixed;
@@ -282,53 +282,64 @@ em { font-style: italic; }
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   height: 80px;
 }
 
-.nav-logo { display: flex; align-items: center; }
-.nav-logo-img { height: 36px; width: auto; }
-
-.nav-links {
+/* Left: Home + hamburger */
+.nav-left {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: var(--sp-4);
 }
 
-.nav-link {
+.nav-home {
   font-family: var(--font-label);
   font-size: 0.65rem;
   font-weight: 500;
-  color: var(--on-surface-variant);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 0.25rem 0;
-  text-decoration: none;
-  transition: color 0.5s;
-}
-.nav-link:hover { color: var(--primary); }
-.nav-link.active {
   color: var(--primary);
+  text-decoration: none;
   border-bottom: 1px solid rgba(99,90,84,0.2);
   padding-bottom: 2px;
+  transition: color 0.5s;
+}
+.nav-home:hover { color: var(--on-surface); }
+
+/* Center: Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-logo-img { height: 40px; width: auto; }
+
+/* Right: CTA */
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .nav-cta {
-  padding: 0.6rem 1.5rem;
+  padding: 0.55rem 1.5rem;
   font-size: 0.6rem;
 }
 
+/* Hamburger toggle — always visible */
 .nav-toggle {
-  display: none;
   background: none;
   border: none;
   cursor: pointer;
-  width: 28px;
-  height: 22px;
+  width: 24px;
+  height: 18px;
   position: relative;
-  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .nav-toggle span {
   display: block;
@@ -340,11 +351,40 @@ em { font-style: italic; }
   transition: all 0.3s;
 }
 .nav-toggle span:nth-child(1) { top: 0; }
-.nav-toggle span:nth-child(2) { top: 10px; }
-.nav-toggle span:nth-child(3) { top: 20px; }
-.nav-toggle.active span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+.nav-toggle span:nth-child(2) { top: 8px; }
+.nav-toggle span:nth-child(3) { top: 16px; }
+.nav-toggle.active span:nth-child(1) { top: 8px; transform: rotate(45deg); }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
-.nav-toggle.active span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+.nav-toggle.active span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+/* Dropdown menu */
+.nav-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+}
+.nav-dropdown.active {
+  max-height: 400px;
+  padding: var(--sp-6) 2rem var(--sp-8);
+}
+
+.nav-link {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--sp-3) 0;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+.nav-link:hover { color: var(--primary); }
 
 /* ============================================
    HERO — Full-screen, image blend
@@ -1425,9 +1465,7 @@ em { font-style: italic; }
    RESPONSIVE
    ============================================ */
 @media (max-width: 1024px) {
-  .nav-cta { display: none; }
   .hero-content { max-width: 90%; }
-  .po-grid { gap: var(--sp-10); }
   .cards-grid.cards-3 { grid-template-columns: 1fr 1fr; }
 
   .offer-detail { grid-template-columns: 250px 1fr; }
@@ -1435,37 +1473,20 @@ em { font-style: italic; }
 
   .magazine-article { grid-template-columns: 300px 1fr; }
   .magazine-article--reverse { grid-template-columns: 1fr 300px; }
-
 }
 
 @media (max-width: 768px) {
-  .nav-inner { height: 64px; }
-  .nav-logo-img { height: 30px; }
-  .nav-toggle { display: block; }
-
-  .nav-links {
-    position: fixed;
-    inset: 0;
-    background: var(--surface);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--sp-6);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-    z-index: 999;
-  }
-  .nav-links.active { opacity: 1; visibility: visible; }
-  .nav-link { font-size: 0.8rem; letter-spacing: 0.2em; }
-  .nav-links .nav-cta { display: inline-flex; margin-top: var(--sp-4); }
+  .nav-inner { height: 60px; }
+  .nav-logo-img { height: 28px; }
+  .nav-home { font-size: 0.55rem; }
+  .nav-cta { padding: 0.45rem 1rem; font-size: 0.5rem; }
 
   .hero { min-height: 80vh; }
   .hero h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
   .hero-ctas { flex-direction: column; }
   .hero-ctas .btn { width: 100%; }
 
-  .page-hero { padding: calc(64px + var(--sp-16)) 0 var(--sp-10); }
+  .page-hero { padding: calc(60px + var(--sp-16)) 0 var(--sp-10); }
 
   .trust-items { gap: var(--sp-6); }
 
@@ -1485,7 +1506,7 @@ em { font-style: italic; }
 
   .episode { grid-template-columns: 1fr; gap: var(--sp-6); }
 
-  .contact-split { grid-template-columns: 1fr; margin-top: 64px; }
+  .contact-split { grid-template-columns: 1fr; margin-top: 60px; }
   .contact-visual { min-height: 40vh; }
   .contact-info-grid { grid-template-columns: 1fr; }
 
@@ -1502,7 +1523,23 @@ em { font-style: italic; }
 
 @media (max-width: 480px) {
   .container, .container-narrow { padding: 0 var(--sp-4); }
+
+  .nav-inner { padding: 0 var(--sp-4); height: 56px; }
+  .nav-logo-img { height: 24px; }
+  .nav-home { font-size: 0.5rem; letter-spacing: 0.1em; }
+  .nav-cta { padding: 0.4rem 0.75rem; font-size: 0.45rem; letter-spacing: 0.1em; }
+  .nav-dropdown { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+
+  .hero h1 { font-size: 2rem; }
+  .page-hero { padding: calc(56px + var(--sp-12)) 0 var(--sp-8); }
+  .page-hero h1 { font-size: 1.8rem; }
+
   .trust-items { flex-direction: column; gap: var(--sp-4); }
-  .contact-visual-overlay { padding: var(--sp-8); }
-  .contact-main { padding: var(--sp-8) var(--sp-4); }
+
+  .contact-split { margin-top: 56px; }
+  .contact-visual-overlay { padding: var(--sp-6); }
+  .contact-main { padding: var(--sp-6) var(--sp-4); }
+
+  .section { padding: var(--sp-16) 0; }
+  .pull-quote p { font-size: 1.1rem; }
 }
