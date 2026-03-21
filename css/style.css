@@ -162,11 +162,11 @@ strong { font-weight: 600; color: var(--text); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 100px;
 }
 .nav-left { display: flex; align-items: center; gap: 2rem; }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo-img { height: 70px; width: auto; }
+.nav-logo-img { height: 140px; width: auto; }
 .nav-links-desktop { display: flex; align-items: center; gap: 1.75rem; }
 .nav-title {
   font-family: var(--font-heading);
@@ -302,12 +302,27 @@ strong { font-weight: 600; color: var(--text); }
    ============================================ */
 .swan-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 0;
   align-items: center;
+  position: relative;
+}
+.swan-img {
+  position: relative;
+  z-index: 0;
 }
 .swan-img img {
   width: 100%;
+  border-radius: var(--radius);
+}
+.swan-text {
+  position: relative;
+  z-index: 1;
+  margin-left: -6rem;
+  padding: 2.5rem;
+  background: rgba(249,248,246,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: var(--radius);
 }
 .swan-quote {
@@ -671,6 +686,10 @@ strong { font-weight: 600; color: var(--text); }
 .contact-social-link:hover { opacity: 1; }
 .contact-social-link svg { width: 18px; height: 18px; fill: var(--text); }
 
+.contact-social-big { width: 56px; height: 56px; opacity: 0.6; }
+.contact-social-big svg { width: 40px; height: 40px; fill: var(--text); }
+.contact-social-big:hover { opacity: 1; }
+
 .magazine-theme { margin-bottom: 2rem; }
 .magazine-theme-title { font-size: 1.4rem; font-weight: 600; color: var(--accent); }
 .magazine-article { display: grid; grid-template-columns: 340px 1fr; gap: 2rem; margin-bottom: 3rem; align-items: start; }
@@ -724,8 +743,8 @@ strong { font-weight: 600; color: var(--text); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
 
-  .nav-inner { height: 64px; }
-  .nav-logo-img { height: 50px; }
+  .nav-inner { height: 70px; }
+  .nav-logo-img { height: 60px; }
 
   .hero-split { min-height: 70vh; }
   .hero-split-img { object-position: 30% center; }
@@ -741,6 +760,7 @@ strong { font-weight: 600; color: var(--text); }
   .hero-banner-ctas .btn { width: 100%; }
 
   .swan-split { grid-template-columns: 1fr; }
+  .swan-text { margin-left: 0; padding: 1.5rem; background: none; backdrop-filter: none; }
   .po-two-col { grid-template-columns: 1fr; }
   .method-grid { grid-template-columns: 1fr; }
   .offer-grid { grid-template-columns: 1fr; }
