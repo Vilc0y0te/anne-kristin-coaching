@@ -393,7 +393,7 @@ em { font-style: italic; }
 .hero-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   margin-top: 80px;
 }
 
@@ -405,31 +405,32 @@ em { font-style: italic; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% center;
-  filter: grayscale(100%);
+  object-position: 80% center;
 }
 
 .hero-split-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--sp-16) var(--sp-16) var(--sp-16) var(--sp-16);
-  background: var(--surface);
+  padding: var(--sp-16);
+  background: var(--surface-container-low);
 }
 
 .hero-split-text h1 {
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-family: var(--font-headline);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
   margin-bottom: var(--sp-8);
-  text-transform: none;
+  color: var(--on-surface);
 }
 
 .hero-split-text .hero-sub {
   color: var(--on-surface-variant);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.7;
-  max-width: 500px;
+  max-width: 480px;
   margin-bottom: var(--sp-10);
 }
 
@@ -860,13 +861,16 @@ em { font-style: italic; }
    ============================================ */
 .intro-split {
   display: grid;
-  grid-template-columns: 5fr 7fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--sp-16);
-  align-items: start;
+  align-items: center;
+}
+.intro-image {
+  position: sticky;
+  top: var(--sp-20);
 }
 .intro-image img {
   width: 100%;
-  filter: grayscale(30%);
 }
 .intro-text .pull-quote {
   margin-bottom: var(--sp-8);
@@ -1476,8 +1480,8 @@ em { font-style: italic; }
 
   .hero-split { grid-template-columns: 1fr; min-height: auto; margin-top: 60px; }
   .hero-split-image { height: 50vh; }
-  .hero-split-text { padding: var(--sp-10) var(--sp-6); }
-  .hero-split-text h1 { font-size: 1.8rem; }
+  .hero-split-text { padding: var(--sp-8) var(--sp-6); }
+  .hero-split-text h1 { font-size: 1.5rem; }
 
   .page-hero { padding: calc(60px + var(--sp-16)) 0 var(--sp-10); }
 
