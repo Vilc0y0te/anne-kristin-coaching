@@ -288,12 +288,15 @@ em { font-style: italic; }
   height: 80px;
 }
 
-/* Left: Logo + desktop links */
+/* Left: Logo + hamburger + desktop links */
 .nav-left {
   display: flex;
   align-items: center;
-  gap: var(--sp-8);
+  gap: var(--sp-6);
 }
+
+.nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+.nav-logo-img { height: 36px; width: auto; }
 
 .nav-links-desktop {
   display: flex;
@@ -1463,6 +1466,9 @@ em { font-style: italic; }
 .img-crop-left {
   object-position: left center;
 }
+.img-crop-bottom {
+  object-position: center bottom;
+}
 
 /* ============================================
    SCROLL ANIMATIONS
@@ -1497,6 +1503,7 @@ em { font-style: italic; }
 
 @media (max-width: 768px) {
   .nav-inner { height: 60px; }
+  .nav-logo-img { height: 28px; }
   .nav-title { font-size: 0.7rem; letter-spacing: 0.15em; }
   .nav-links-desktop { display: none; }
   .nav-cta { padding: 0.45rem 1rem; font-size: 0.5rem; }
@@ -1545,6 +1552,7 @@ em { font-style: italic; }
   .container, .container-narrow { padding: 0 var(--sp-4); }
 
   .nav-inner { padding: 0 var(--sp-4); height: 56px; }
+  .nav-logo-img { height: 22px; }
   .nav-title { font-size: 0.55rem; letter-spacing: 0.1em; }
   .nav-cta { padding: 0.4rem 0.75rem; font-size: 0.45rem; letter-spacing: 0.1em; }
   .nav-dropdown { padding-left: var(--sp-4); padding-right: var(--sp-4); }
