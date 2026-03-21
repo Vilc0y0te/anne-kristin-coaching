@@ -301,11 +301,9 @@ strong { font-weight: 600; color: var(--text); }
    SWAN STORY
    ============================================ */
 .swan-split {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 0;
-  align-items: center;
   position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
 }
 .swan-img {
   position: relative;
@@ -313,13 +311,19 @@ strong { font-weight: 600; color: var(--text); }
 }
 .swan-img img {
   width: 100%;
-  border-radius: var(--radius);
+  display: block;
 }
 .swan-text {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
   z-index: 1;
-  margin-left: -10rem;
-  padding: 2rem 0 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem;
 }
 .swan-quote {
   font-family: var(--font-heading);
@@ -755,8 +759,7 @@ strong { font-weight: 600; color: var(--text); }
   .hero-banner-ctas { flex-direction: column; }
   .hero-banner-ctas .btn { width: 100%; }
 
-  .swan-split { grid-template-columns: 1fr; }
-  .swan-text { margin-left: 0; padding: 1.5rem; background: none; backdrop-filter: none; }
+  .swan-text { position: relative; width: 100%; height: auto; padding: 1.5rem; }
   .po-two-col { grid-template-columns: 1fr; }
   .method-grid { grid-template-columns: 1fr; }
   .offer-grid { grid-template-columns: 1fr; }
