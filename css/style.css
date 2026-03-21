@@ -1285,36 +1285,68 @@ em { font-style: italic; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--sp-16);
+  padding: var(--sp-16) var(--sp-16);
   background: var(--surface);
 }
 
-.contact-info { max-width: 450px; }
+.contact-info {
+  max-width: 500px;
+  width: 100%;
+}
 
-.contact-info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--sp-10);
+.contact-logo {
+  height: 80px;
+  width: auto;
+  margin-bottom: var(--sp-12);
+}
+
+.contact-heading {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: var(--sp-6);
+}
+
+.contact-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--sp-10);
+}
+
+.contact-email-btn {
+  width: 100%;
+  margin-bottom: var(--sp-12);
+  font-size: 0.75rem;
+  padding: 1.2rem 2rem;
+}
+
+.contact-details {
+  display: flex;
+  gap: var(--sp-12);
+  margin-bottom: var(--sp-10);
 }
 
 .contact-info-item h4 {
   font-family: var(--font-label);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--on-surface-variant);
-  margin-bottom: var(--sp-3);
+  margin-bottom: var(--sp-2);
   opacity: 0.6;
 }
-.contact-info-item p { font-size: 0.95rem; color: var(--on-surface); }
+.contact-info-item p { font-size: 1rem; color: var(--on-surface); }
 .contact-info-item a { color: var(--primary); }
 
-.contact-socials { display: flex; gap: var(--sp-4); }
+.contact-socials {
+  display: flex;
+  gap: var(--sp-6);
+}
 
 .contact-social-link {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1322,7 +1354,7 @@ em { font-style: italic; }
   transition: opacity var(--transition);
 }
 .contact-social-link:hover { opacity: 1; }
-.contact-social-link svg { width: 16px; height: 16px; fill: var(--on-surface); }
+.contact-social-link svg { width: 20px; height: 20px; fill: var(--on-surface); }
 
 /* ============================================
    MAGAZINE / RESOURCES
