@@ -150,9 +150,7 @@ strong { font-weight: 600; color: var(--text); }
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(249,248,246,0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--bg);
   border-bottom: 1px solid var(--outline-light);
 }
 .nav-inner {
