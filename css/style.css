@@ -669,6 +669,53 @@ strong { font-weight: 600; color: var(--text); }
   .contact-simple-socials { gap: 1.5rem; }
 }
 
+/* Services sub-navigation (sticky under main nav) */
+.svc-subnav {
+  position: sticky;
+  top: 100px;
+  z-index: 900;
+  background: var(--bg-warm);
+  border-bottom: 1px solid var(--outline-light);
+}
+.svc-subnav-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0.75rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.svc-subnav-link {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 0.35rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.svc-subnav-link:hover { color: var(--text); }
+.svc-subnav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+#coaching, #archetypal-reading, #archetypal-fantasy-portraits { scroll-margin-top: 160px; }
+
+@media (max-width: 960px) {
+  .svc-subnav { top: 80px; }
+  .svc-subnav-inner { gap: 0; justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0.6rem 1rem; }
+  .svc-subnav-inner::-webkit-scrollbar { display: none; }
+  .svc-subnav-link { font-size: 0.62rem; padding: 0.3rem 0.9rem; letter-spacing: 0.1em; }
+  #coaching, #archetypal-reading, #archetypal-fantasy-portraits { scroll-margin-top: 128px; }
+}
+@media (max-width: 480px) {
+  .svc-subnav { top: 72px; }
+  #coaching, #archetypal-reading, #archetypal-fantasy-portraits { scroll-margin-top: 116px; }
+}
+
 /* Services page typography */
 .svc-questions { font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; line-height: 1.7; color: var(--text); margin-bottom: 1.5rem; }
 .svc-prompt { font-family: var(--font-heading); font-style: italic; color: var(--accent); font-size: 1.05rem; line-height: 1.55; margin: 1rem 0; }

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2026042013">
+  <link rel="stylesheet" href="css/style.css?v=2026042014">
 </head>
 <body>
 
@@ -46,6 +46,15 @@
       <a href="podcast.html" class="nav-link">Podcast</a>
       <a href="resources.html" class="nav-link">The Journal</a>
       <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ====== SERVICES SUB-NAV ====== -->
+  <nav class="svc-subnav" aria-label="Services navigation">
+    <div class="svc-subnav-inner">
+      <a href="#coaching" class="svc-subnav-link" data-target="coaching">Coaching</a>
+      <a href="#archetypal-reading" class="svc-subnav-link" data-target="archetypal-reading">Archetypal Reading</a>
+      <a href="#archetypal-fantasy-portraits" class="svc-subnav-link" data-target="archetypal-fantasy-portraits">Fantasy Portraits</a>
     </div>
   </nav>
 
@@ -182,5 +191,28 @@
   </footer>
 
   <script src="js/main.js?v=2026032107"></script>
+  <script>
+    (function(){
+      var links = document.querySelectorAll('.svc-subnav-link');
+      if (!links.length) return;
+      var sections = Array.prototype.map.call(links, function(l){ return document.getElementById(l.dataset.target); });
+      var mainnav = document.querySelector('.nav');
+      var subnav = document.querySelector('.svc-subnav');
+      function update(){
+        var offset = (mainnav ? mainnav.offsetHeight : 0) + (subnav ? subnav.offsetHeight : 0) + 40;
+        var active = 0;
+        for (var i = 0; i < sections.length; i++) {
+          var s = sections[i];
+          if (s && s.getBoundingClientRect().top <= offset) active = i;
+        }
+        for (var j = 0; j < links.length; j++) {
+          links[j].classList.toggle('active', j === active);
+        }
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
 </body>
 </html>
