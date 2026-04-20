@@ -647,6 +647,18 @@ strong { font-weight: 600; color: var(--text); }
 .quote-section blockquote p { font-family: var(--font-heading); font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 400; font-style: italic; max-width: 650px; margin: 0 auto; line-height: 1.4; color: var(--text); }
 .quote-section cite { display: block; margin-top: 1rem; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-style: normal; }
 
+/* Services page typography */
+.svc-questions { font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; line-height: 1.7; color: var(--text); margin-bottom: 1.5rem; }
+.svc-prompt { font-family: var(--font-heading); font-style: italic; color: var(--accent); font-size: 1.05rem; line-height: 1.55; margin: 1rem 0; }
+.svc-tagline { font-family: var(--font-heading); font-style: italic; font-size: 1.25rem; color: var(--text-light); margin-top: 0.5rem; }
+.svc-pricing { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; margin-top: 3rem; text-align: center; }
+.svc-pricing .price-now { font-size: 1.5rem; }
+@media (max-width: 768px) {
+  .svc-questions { font-size: 1.1rem; }
+  .svc-prompt { font-size: 0.98rem; }
+  .svc-pricing .price-now { font-size: 1.2rem; }
+}
+
 .podcast-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
 .podcast-logo { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
 .podcast-logo-icon { font-size: 1.5rem; color: var(--accent); }
