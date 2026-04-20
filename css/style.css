@@ -329,14 +329,14 @@ strong { font-weight: 600; color: var(--text); }
 }
 .swan-quote {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.5;
   color: #fff;
   margin-bottom: 1.5rem;
   font-style: italic;
 }
-.swan-text p { font-size: 0.92rem; color: rgba(255,255,255,0.9); }
+.swan-text p { font-size: 1.1rem; line-height: 1.65; color: rgba(255,255,255,0.92); }
 
 /* ============================================
    IS THIS YOU — Pain vs Gain with visual contrast
@@ -738,7 +738,17 @@ strong { font-weight: 600; color: var(--text); }
 @media (max-width: 960px) {
   .nav-links-desktop { display: none; }
   .nav-cta { display: none; }
-  .nav-title { display: none; }
+  .nav-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.08rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    pointer-events: auto;
+  }
+  .nav { position: relative; }
   .nav-toggle {
     display: flex;
     flex-direction: column;
@@ -909,6 +919,7 @@ strong { font-weight: 600; color: var(--text); }
   .section-padded { padding: 2.5rem 0; }
   .container, .container-narrow { padding: 0 1rem; }
   .nav-inner { padding: 0 1rem; }
+  .nav-title { font-size: 0.93rem; letter-spacing: 0.05em; }
   .nav-logo-img { height: 60px; }
   .nav-inner { height: 72px; }
   .nav-dropdown { top: 72px; }
