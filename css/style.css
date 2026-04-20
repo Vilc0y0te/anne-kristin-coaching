@@ -772,17 +772,7 @@ strong { font-weight: 600; color: var(--text); }
 @media (max-width: 960px) {
   .nav-links-desktop { display: none; }
   .nav-cta { display: none; }
-  .nav-title {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.08rem;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    pointer-events: auto;
-  }
-  .nav { position: relative; }
+  .nav-title { display: none; }
   .nav-toggle {
     display: flex;
     flex-direction: column;
@@ -957,7 +947,6 @@ strong { font-weight: 600; color: var(--text); }
   .section-padded { padding: 2.5rem 0; }
   .container, .container-narrow { padding: 0 1rem; }
   .nav-inner { padding: 0 1rem; }
-  .nav-title { font-size: 0.93rem; letter-spacing: 0.05em; }
   .nav-logo-img { height: 60px; }
   .nav-inner { height: 72px; }
   .nav-dropdown { top: 72px; }
