@@ -1131,7 +1131,7 @@ strong { font-weight: 600; color: var(--text); }
 .svc-subnav.subnav-hidden { transform: translateY(-130%); }
 
 /* Calendly */
-.calendly-wrap { min-height: 680px; }
+.calendly-wrap { overflow: hidden; border-radius: var(--radius); }
 
 /* Package rows (work-with-me) */
 .pkg-row {

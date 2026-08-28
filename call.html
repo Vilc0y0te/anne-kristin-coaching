@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2026042101">
+  <link rel="stylesheet" href="css/style.css?v=2026042102">
   <link rel="icon" type="image/png" href="images/logo-akv.png?v=2026042003">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Book a Discovery Call">
@@ -149,12 +149,25 @@
       var mount = document.getElementById('schedulerMount');
       var fallback = document.getElementById('schedulerFallback');
       if (CALENDLY_URL) {
+        var params = '?hide_gdpr_banner=1&hide_event_type_details=1'
+                   + '&primary_color=c27a62&background_color=f3f0eb&text_color=2c2c2c';
         var div = document.createElement('div');
         div.className = 'calendly-inline-widget';
-        div.setAttribute('data-url', CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=C27A62');
-        div.style.minWidth = '320px';
-        div.style.height = '680px';
+        div.setAttribute('data-url', CALENDLY_URL + params);
+        div.style.minWidth = '300px';
+        div.style.height = '700px';
+        div.style.transition = 'height 0.2s ease';
         mount.appendChild(div);
+
+        // Calendly reports its real content height — track it so the embed
+        // never shows an internal scrollbar.
+        window.addEventListener('message', function(e){
+          if (e.origin !== 'https://calendly.com' || !e.data) return;
+          if (e.data.event === 'calendly.page_height' && e.data.payload && e.data.payload.height) {
+            div.style.height = e.data.payload.height;
+          }
+        });
+
         var s = document.createElement('script');
         s.src = 'https://assets.calendly.com/assets/external/widget.js';
         s.async = true;
