@@ -61,7 +61,7 @@
     <div class="container">
       <span class="label">Free &middot; 12 Questions &middot; Instant Result</span>
       <h1>Which archetype is running your life?</h1>
-      <p class="page-hero-sub">A Jungian self-assessment. Answer with your first instinct &mdash; the quiz listens for the voice that answers before you think.</p>
+      <p class="page-hero-sub">A Jungian self-assessment. Answer with your first instinct, the quiz listens for the voice that answers before you think.</p>
     </div>
   </header>
 
@@ -70,7 +70,7 @@
 
       <!-- Intro -->
       <div id="quizIntro" class="text-center">
-        <p style="max-width:520px;margin:0 auto 2rem">Each of us carries a constellation of inner figures &mdash; the Caregiver, the Warrior, the Explorer, the Sage. One of them is usually speaking loudest right now. Twelve questions will tell you which.</p>
+        <p style="max-width:520px;margin:0 auto 2rem">Each of us carries a constellation of inner figures, the Caregiver, the Warrior, the Explorer, the Sage. One of them is usually speaking loudest right now. Twelve questions will tell you which.</p>
         <button id="quizStart" class="btn btn-accent btn-lg">Begin</button>
       </div>
 
@@ -92,7 +92,7 @@
 
         <div style="margin:2.5rem 0 0;padding:2rem;background:var(--surface);border:1px solid var(--outline-light);border-radius:var(--radius);text-align:left">
           <h3 style="margin-bottom:0.5rem">The full breakdown, by email</h3>
-          <p style="font-size:0.9rem;margin-bottom:1.25rem">This is one figure of twelve. Over five short letters I'll walk you through the whole constellation &mdash; the allies, the tensions, and the archetype you may be avoiding.</p>
+          <p style="font-size:0.9rem;margin-bottom:1.25rem">This is one figure of twelve. Over five short letters I'll walk you through the whole constellation, the allies, the tensions, and the archetype you may be avoiding.</p>
           <form name="quiz-results" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/quiz.html?done=1">
             <input type="hidden" name="form-name" value="quiz-results">
             <p class="hidden-field"><label>Leave this empty: <input name="bot-field"></label></p>
@@ -112,7 +112,7 @@
       <!-- Thanks view (after Netlify submit) -->
       <div id="quizThanks" style="display:none;max-width:520px;margin:0 auto;text-align:center">
         <h2 style="margin-bottom:1rem">The first letter is on its way.</h2>
-        <p style="margin-bottom:2rem">Five short letters over five days &mdash; one archetype lesson at a time. If nothing arrives, check the spam folder and rescue me.</p>
+        <p style="margin-bottom:2rem">Five short letters over five days, one archetype lesson at a time. If nothing arrives, check the spam folder and rescue me.</p>
         <a href="the-reading.html" class="btn btn-accent btn-lg">Meanwhile, Explore the Reading</a>
       </div>
 
@@ -147,7 +147,7 @@
   <script src="js/main.js?v=2026032107"></script>
   <script>
     (function(){
-      // Draft questions & archetype mapping — Anne reviews and edits copy freely;
+      // Draft questions & archetype mapping, Anne reviews and edits copy freely;
       // each archetype key appears exactly 4 times across the deck.
       var QUESTIONS = [
         { q: "What pulls you out of bed on a good morning?", opts: [
@@ -161,7 +161,7 @@
           ["The one listening more than speaking", "sage"],
           ["The one everyone finds easy to be with", "everyperson"]]},
         { q: "The stories that stay with you are about…", opts: [
-          ["Transformation — someone becoming who they were meant to be", "visionary"],
+          ["Transformation, someone becoming who they were meant to be", "visionary"],
           ["Love that refuses to be reasonable", "lover"],
           ["The one who breaks the rules that needed breaking", "rebel"],
           ["Simple goodness, rewarded in the end", "innocent"]]},
@@ -174,17 +174,17 @@
           ["Somewhere you have never been", "explorer"],
           ["Hours lost in making something", "creator"],
           ["A long table with people you love", "lover"],
-          ["Play — games, silliness, lightness", "jester"]]},
+          ["Play, games, silliness, lightness", "jester"]]},
         { q: "People who know you well admire your…", opts: [
           ["Courage when it counts", "warrior"],
           ["Imagination for what could be", "visionary"],
           ["Refusal to pretend the rules are fine", "rebel"],
-          ["Groundedness — you're real", "everyperson"]]},
+          ["Groundedness, you're real", "everyperson"]]},
         { q: "The fear that visits most often…", opts: [
           ["Being trapped in sameness", "explorer"],
-          ["Chaos — things slipping from control", "ruler"],
+          ["Chaos, things slipping from control", "ruler"],
           ["Being finally, truly alone", "lover"],
-          ["Being deceived — or deceiving myself", "sage"]]},
+          ["Being deceived, or deceiving myself", "sage"]]},
         { q: "In conflict, you tend to…", opts: [
           ["Stand and fight for what's right", "warrior"],
           ["Find the joke that lets everyone breathe", "jester"],
@@ -194,7 +194,7 @@
           ["A blank page", "creator"],
           ["Someone who quietly needs help", "caregiver"],
           ["A fresh start", "innocent"],
-          ["A synchronicity — a sign", "visionary"]]},
+          ["A synchronicity, a sign", "visionary"]]},
         { q: "At work, you're at your best when…", opts: [
           ["You own the outcome", "ruler"],
           ["No two days look alike", "explorer"],
@@ -214,17 +214,17 @@
 
       var ARCHETYPES = {
         innocent: { name: "The Innocent", essence: "Trust, renewal, and the stubborn belief that life can be good.",
-          body: "You lead with faith — in people, in beginnings, in the possibility that things work out. That hope steadies everyone around you more than you know.",
+          body: "You lead with faith, in people, in beginnings, in the possibility that things work out. That hope steadies everyone around you more than you know.",
           shadow: "The shadow side: looking away from what's difficult, rather than through it." },
         everyperson: { name: "The Everyperson", essence: "Belonging, realness, and the gift of putting people at ease.",
-          body: "You are the person others relax around. No performance, no pedestal — just genuine connection and solid ground.",
+          body: "You are the person others relax around. No performance, no pedestal, just genuine connection and solid ground.",
           shadow: "The shadow side: blending in so well that your own voice goes unheard." },
         warrior: { name: "The Warrior", essence: "Courage, discipline, and the will to see it through.",
           body: "When something matters, you show up and hold the line. People trust you in a crisis because you don't flinch.",
-          shadow: "The shadow side: turning everything — even rest, even love — into a battle to win." },
+          shadow: "The shadow side: turning everything, even rest, even love, into a battle to win." },
         caregiver: { name: "The Caregiver", essence: "Generosity, protection, and quiet strength for others.",
           body: "You notice what people need before they say it, and you give without keeping score. You are the reason others feel safe.",
-          shadow: "The shadow side: giving until nothing is left — and then resenting it." },
+          shadow: "The shadow side: giving until nothing is left, and then resenting it." },
         explorer: { name: "The Explorer", essence: "Freedom, authenticity, and the pull of the open door.",
           body: "You would rather be lost somewhere new than comfortable somewhere old. Your life is a search for what's true, not what's expected.",
           shadow: "The shadow side: restlessness that never lets anything take root." },
@@ -232,8 +232,8 @@
           body: "You see what everyone pretends not to see, and you say it. Systems change because people like you refuse to nod along.",
           shadow: "The shadow side: burning things down without building what comes next." },
         lover: { name: "The Lover", essence: "Devotion, presence, and a life measured in closeness.",
-          body: "You experience the world at full intensity — beauty, intimacy, connection. Where you commit, you commit entirely.",
-          shadow: "The shadow side: losing yourself in the beloved — person, project, or ideal." },
+          body: "You experience the world at full intensity, beauty, intimacy, connection. Where you commit, you commit entirely.",
+          shadow: "The shadow side: losing yourself in the beloved, person, project, or ideal." },
         creator: { name: "The Creator", essence: "Imagination made real, and the ache of the unmade thing.",
           body: "You don't feel fully alive unless something is taking shape under your hands. Your inner world is a workshop that never closes.",
           shadow: "The shadow side: perfectionism that keeps the work forever almost-ready." },
@@ -242,12 +242,12 @@
           shadow: "The shadow side: dodging depth with a punchline, just when depth is needed." },
         sage: { name: "The Sage", essence: "Understanding, clarity, and the long patient look beneath the surface.",
           body: "You need to know what's true more than you need to be comfortable. People come to you when they're ready to hear it straight.",
-          shadow: "The shadow side: hiding in analysis — understanding a life instead of living it." },
+          shadow: "The shadow side: hiding in analysis, understanding a life instead of living it." },
         visionary: { name: "The Visionary", essence: "Transformation, pattern-sight, and trust in the unseen.",
-          body: "You perceive connections others miss — the symbol in the ordinary, the meaning in the coincidence. You change rooms by reframing them.",
-          shadow: "The shadow side: drifting from the ground — vision without hands." },
+          body: "You perceive connections others miss, the symbol in the ordinary, the meaning in the coincidence. You change rooms by reframing them.",
+          shadow: "The shadow side: drifting from the ground, vision without hands." },
         ruler: { name: "The Ruler", essence: "Order, responsibility, and the weight of holding things together.",
-          body: "Things run because you make them run. You take responsibility as naturally as breathing — and others build their lives on that reliability.",
+          body: "Things run because you make them run. You take responsibility as naturally as breathing, and others build their lives on that reliability.",
           shadow: "The shadow side: control that tightens until it squeezes the life out." }
       };
 
