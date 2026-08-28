@@ -1161,3 +1161,6 @@ strong { font-weight: 600; color: var(--text); }
   .pkg-row .pkg-ctas { flex-direction: column; }
   .pkg-row .pkg-ctas .btn { width: 100%; text-align: center; }
 }
+
+/* Journal anchors land clear of the sticky nav */
+#art-messages, #mind-igniter, #epigenetics { scroll-margin-top: 130px; }
