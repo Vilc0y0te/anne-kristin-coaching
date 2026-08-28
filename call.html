@@ -149,14 +149,11 @@
       var mount = document.getElementById('schedulerMount');
       var fallback = document.getElementById('schedulerFallback');
       if (CALENDLY_URL) {
-        var params = '?hide_gdpr_banner=1&hide_event_type_details=1'
-                   + '&primary_color=c27a62&background_color=f3f0eb&text_color=2c2c2c';
         var div = document.createElement('div');
         div.className = 'calendly-inline-widget';
-        div.setAttribute('data-url', CALENDLY_URL + params);
+        div.setAttribute('data-url', CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=C27A62');
         div.style.minWidth = '300px';
         div.style.height = '700px';
-        div.style.transition = 'height 0.2s ease';
         mount.appendChild(div);
 
         // Calendly reports its real content height — track it so the embed
@@ -164,7 +161,8 @@
         window.addEventListener('message', function(e){
           if (e.origin !== 'https://calendly.com' || !e.data) return;
           if (e.data.event === 'calendly.page_height' && e.data.payload && e.data.payload.height) {
-            div.style.height = e.data.payload.height;
+            var h = e.data.payload.height;
+            div.style.height = (typeof h === 'number') ? h + 'px' : String(h);
           }
         });
 
@@ -172,6 +170,15 @@
         s.src = 'https://assets.calendly.com/assets/external/widget.js';
         s.async = true;
         document.body.appendChild(s);
+
+        // Failsafe: if the widget hasn't produced its iframe after 8s,
+        // show the WhatsApp fallback so nobody is left with a blank box.
+        setTimeout(function(){
+          if (!mount.querySelector('iframe')) {
+            mount.style.display = 'none';
+            fallback.style.display = 'block';
+          }
+        }, 8000);
       } else {
         mount.style.display = 'none';
         fallback.style.display = 'block';
