@@ -132,6 +132,7 @@
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin:1rem 0">
         <button class="btn btn-accent btn-sm" id="bccBtn">Copy recipient list (BCC)</button>
         <button class="btn btn-outline btn-sm" id="copyNl">Copy draft</button>
+        <button class="btn btn-outline btn-sm" id="gmailNl">Open in Gmail (BCC filled)</button>
         <button class="btn btn-outline btn-sm" id="mailNl">Open in mail app</button>
         <button class="btn btn-ghost btn-sm" id="sentNl">Mark this month sent</button>
       </div>
@@ -164,6 +165,23 @@
   </section>
 
 </main>
+
+<!-- COMPOSER MODAL -->
+<div id="composer" style="display:none;position:fixed;inset:0;background:rgba(30,27,20,0.55);z-index:300;overflow:auto;padding:2rem 1rem">
+  <div style="max-width:720px;margin:0 auto;background:var(--surface);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-lg)">
+    <h2 style="font-size:1.2rem;margin-bottom:0.75rem">Draft ready</h2>
+    <p style="font-size:0.8rem;margin-bottom:0.75rem">To: <b id="cTo"></b></p>
+    <input class="field-input" id="cSubject" aria-label="Subject">
+    <textarea class="tpl" id="cBody" style="min-height:300px"></textarea>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem">
+      <button class="btn btn-accent btn-sm" id="cGmail">Open in Gmail</button>
+      <button class="btn btn-outline btn-sm" id="cMailApp">Open in Mail App</button>
+      <button class="btn btn-outline btn-sm" id="cCopy">Copy Email</button>
+      <button class="btn btn-ghost btn-sm" id="cClose" style="margin-left:auto">Close</button>
+    </div>
+    <p style="font-size:0.72rem;margin-top:0.75rem">Using any of the three send options marks this item as replied and schedules its follow-up automatically. Edit the draft above freely before sending.</p>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -350,9 +368,19 @@
     if (s.form==='team-enquiry') return esc(s.data.organisation||'') + ' · ' + esc(s.data.format||'') + (s.data.message ? ' · "' + esc(s.data.message) + '"' : '');
     return 'Joined from ' + esc(s.data.source || 'the site');
   }
-  function mailto(s){
-    var t = templateFor(s);
-    return 'mailto:' + encodeURIComponent(s.email) + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+  /* ---------- composer ---------- */
+  var composeCtx = null; // { to, onSend }
+  function openComposer(to, tpl, onSend){
+    composeCtx = { to: to, onSend: onSend || function(){} };
+    document.getElementById('cTo').textContent = to;
+    document.getElementById('cSubject').value = tpl.subject;
+    document.getElementById('cBody').value = tpl.body;
+    document.getElementById('composer').style.display = 'block';
+  }
+  function composeVals(){
+    return { to: composeCtx.to,
+      subject: document.getElementById('cSubject').value,
+      body: document.getElementById('cBody').value };
   }
   function copyText(txt, btn){
     navigator.clipboard.writeText(txt).then(function(){ var o = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(function(){ btn.textContent = o; }, 1500); });
@@ -370,7 +398,7 @@
       '<div class="sub-detail">' + detailOf(s) + '</div>' +
       (it.note ? '<div class="sub-detail">📝 ' + esc(it.note) + '</div>' : '') + '</div>' +
       '<div class="sub-actions">' +
-      '<a class="btn btn-accent btn-sm" href="' + mailto(s) + '" data-act="reply" data-id="' + s.id + '">Draft Reply</a>' +
+      '<button class="btn btn-accent btn-sm" data-act="reply" data-id="' + s.id + '">Draft Reply</button>' +
       '<button class="btn btn-outline btn-sm" data-act="copy" data-id="' + s.id + '">Copy</button>' +
       (showStatus ? '<select class="status-sel" data-act="status" data-id="' + s.id + '">' +
         ['new','replied','done'].map(function(v){ return '<option value="'+v+'"'+(it.st===v?' selected':'')+'>'+v+'</option>'; }).join('') + '</select>' +
@@ -400,7 +428,7 @@
       t += '<div class="sub-row new-item"><div><div class="sub-who">📮 Send The Inner Letter for ' + now.toLocaleString('en',{month:'long'}) + '</div><div class="sub-detail">Draft is ready in the Newsletter tab. Due: first Tuesday of the month.</div></div><div class="sub-actions"><button class="btn btn-accent btn-sm" data-goto="newsletter">Open Draft</button></div></div>';
     }
     open.slice(0, 20).forEach(function(s){ t += rowHtml(s, true); });
-    fuDue.forEach(function(s){ t += '<div class="sub-row overdue"><div><div class="sub-who">🔁 Follow-up: ' + esc(s.name||s.email) + '</div><div class="sub-detail">' + detailOf(s) + '</div></div><div class="sub-actions"><a class="btn btn-accent btn-sm" href="' + fuMailto(s) + '" data-act="fu-done" data-id="' + s.id + '">Draft Follow-up</a></div></div>'; });
+    fuDue.forEach(function(s){ t += '<div class="sub-row overdue"><div><div class="sub-who">🔁 Follow-up: ' + esc(s.name||s.email) + '</div><div class="sub-detail">' + detailOf(s) + '</div></div><div class="sub-actions"><button class="btn btn-accent btn-sm" data-act="followup" data-id="' + s.id + '">Draft Follow-up</button></div></div>'; });
     document.getElementById('todayList').innerHTML = t || '<div class="empty">Nothing due. Enjoy the quiet, or write next month’s Letter early.</div>';
 
     // Week
@@ -430,9 +458,8 @@
     renderNewsletter(people);
   }
 
-  function fuMailto(s){
-    var t = s.form === 'team-enquiry' ? tplTeams(s) : tplFollowup(s);
-    return 'mailto:' + encodeURIComponent(s.email) + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+  function fuTemplate(s){
+    return s.form === 'team-enquiry' ? tplTeams(s) : tplFollowup(s);
   }
 
   function dedupe(){
@@ -477,6 +504,9 @@
     }
     document.getElementById('bccBtn').onclick = function(){ copyText(rec.join(', '), this); };
     document.getElementById('copyNl').onclick = function(){ copyText('Subject: ' + document.getElementById('nlSubject').value + '\n\n' + document.getElementById('nlBody').value, this); };
+    document.getElementById('gmailNl').onclick = function(){
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent('annek.vaudour@gmail.com') + '&bcc=' + encodeURIComponent(rec.join(',')) + '&su=' + encodeURIComponent(document.getElementById('nlSubject').value) + '&body=' + encodeURIComponent(document.getElementById('nlBody').value), '_blank');
+    };
     document.getElementById('mailNl').onclick = function(){
       location.href = 'mailto:annek.vaudour@gmail.com?bcc=' + encodeURIComponent(rec.join(',')) + '&subject=' + encodeURIComponent(document.getElementById('nlSubject').value) + '&body=' + encodeURIComponent(document.getElementById('nlBody').value);
     };
@@ -520,13 +550,20 @@
     if (el.dataset.copytpl) { copyText(document.getElementById(el.dataset.copytpl).value, el); return; }
     var id = el.dataset.id, it = id && S.items[id];
     if (el.dataset.act === 'reply' && it) {
-      it.st = 'replied';
       var s = subs.find(function(x){ return x.id === id; });
-      if (s && s.form === 'offer-interest') it.fu = new Date(Date.now()+7*DAY).toISOString().slice(0,10);
-      if (s && s.form === 'team-enquiry') it.fu = new Date(Date.now()+3*DAY).toISOString().slice(0,10);
-      save(); setTimeout(renderAll, 400); // let mailto open first
+      openComposer(s.email, templateFor(s), function(){
+        it.st = 'replied';
+        if (s.form === 'offer-interest') it.fu = new Date(Date.now()+7*DAY).toISOString().slice(0,10);
+        if (s.form === 'team-enquiry') it.fu = new Date(Date.now()+3*DAY).toISOString().slice(0,10);
+        save(); renderAll();
+      });
     }
-    if (el.dataset.act === 'fu-done' && it) { it.fu = null; it.st = 'done'; save(); setTimeout(renderAll, 400); }
+    if (el.dataset.act === 'followup' && it) {
+      var sf = subs.find(function(x){ return x.id === id; });
+      openComposer(sf.email, fuTemplate(sf), function(){
+        it.fu = null; it.st = 'done'; save(); renderAll();
+      });
+    }
     if (el.dataset.act === 'copy') {
       var s2 = subs.find(function(x){ return x.id === id; });
       var t = templateFor(s2); copyText('To: ' + s2.email + '\nSubject: ' + t.subject + '\n\n' + t.body, el);
@@ -556,6 +593,25 @@
     a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
     a.download = 'inner-narrative-list.csv';
     a.click();
+  });
+
+  /* composer actions */
+  document.getElementById('cClose').addEventListener('click', function(){ document.getElementById('composer').style.display = 'none'; });
+  document.getElementById('composer').addEventListener('click', function(e){ if (e.target === this) this.style.display = 'none'; });
+  document.getElementById('cGmail').addEventListener('click', function(){
+    var v = composeVals();
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(v.to) + '&su=' + encodeURIComponent(v.subject) + '&body=' + encodeURIComponent(v.body), '_blank');
+    composeCtx.onSend();
+  });
+  document.getElementById('cMailApp').addEventListener('click', function(){
+    var v = composeVals();
+    location.href = 'mailto:' + encodeURIComponent(v.to) + '?subject=' + encodeURIComponent(v.subject) + '&body=' + encodeURIComponent(v.body);
+    composeCtx.onSend();
+  });
+  document.getElementById('cCopy').addEventListener('click', function(){
+    var v = composeVals();
+    copyText('To: ' + v.to + '\nSubject: ' + v.subject + '\n\n' + v.body, this);
+    composeCtx.onSend();
   });
 
   renderTemplates();
