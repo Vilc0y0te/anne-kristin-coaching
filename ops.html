@@ -304,8 +304,14 @@
   function refresh(){
     if (!S.token) return;
     document.getElementById('refreshBtn').textContent = 'Loading…';
-    api('/forms').then(function(forms){
+    api('/sites?per_page=100').then(function(sites){
+      return Promise.all(sites.map(function(site){
+        return api('/sites/' + site.id + '/forms').catch(function(){ return []; });
+      }));
+    }).then(function(formLists){
+      var forms = [].concat.apply([], formLists);
       var mine = forms.filter(function(f){ return FORMS.indexOf(f.name) > -1; });
+      if (!mine.length) throw new Error('no forms found yet — they appear after the first submission on the live site');
       return Promise.all(mine.map(function(f){
         return api('/forms/' + f.id + '/submissions?per_page=100').then(function(list){
           return list.map(function(x){ return {
