@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Operations Desk | Inner Narrative Coach</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2026042105">
+  <link rel="icon" type="image/png" href="images/logo-akv.png?v=2026042003">
+  <style>
+    body { background: var(--bg-warm); }
+    .ops-header { background: var(--bg-dark); color: #fff; padding: 1.1rem 0; position: sticky; top: 0; z-index: 100; }
+    .ops-header-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .ops-brand { font-family: var(--font-heading); font-size: 1.15rem; letter-spacing: 0.05em; }
+    .ops-brand small { display: block; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6; }
+    .ops-tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+    .ops-tab { background: transparent; border: none; color: rgba(255,255,255,0.6); font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 0.9rem; cursor: pointer; border-radius: var(--radius); }
+    .ops-tab:hover { color: #fff; }
+    .ops-tab.active { background: var(--accent); color: #fff; }
+    .ops-tab .cnt { background: rgba(255,255,255,0.25); border-radius: 10px; padding: 0 0.45rem; margin-left: 0.3rem; font-size: 0.65rem; }
+    .ops-main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+    .ops-card { background: var(--surface); border: 1px solid var(--outline-light); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+    .ops-card h2 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+    .ops-card h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; }
+    .sub-row { display: grid; grid-template-columns: 1fr auto; gap: 0.75rem; padding: 0.9rem 1rem; border: 1px solid var(--outline-light); border-radius: var(--radius); margin-bottom: 0.6rem; background: var(--surface); align-items: start; }
+    .sub-row.overdue { border-left: 3px solid #B4432B; }
+    .sub-row.new-item { border-left: 3px solid var(--accent); }
+    .sub-who { font-weight: 600; color: var(--text); }
+    .sub-meta { font-size: 0.75rem; color: var(--text-light); margin-top: 0.15rem; }
+    .sub-detail { font-size: 0.82rem; color: var(--text-light); margin-top: 0.35rem; }
+    .sub-actions { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+    .tag { display: inline-block; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.18rem 0.5rem; border-radius: 3px; margin-right: 0.4rem; }
+    .tag-quiz { background: #E8DFF5; color: #5B3E96; }
+    .tag-interest { background: var(--accent-light); color: var(--accent-hover); }
+    .tag-teams { background: #DDEAE2; color: #2F6247; }
+    .tag-letter { background: #E4E9F0; color: #3A5A82; }
+    .tag-age { background: var(--bg-warm); color: var(--text-light); }
+    .tag-over { background: #F5DBD3; color: #B4432B; }
+    .btn-sm { padding: 0.45rem 0.9rem; font-size: 0.62rem; }
+    .status-sel { font-family: var(--font-body); font-size: 0.68rem; padding: 0.4rem 0.5rem; border: 1px solid var(--outline-light); border-radius: var(--radius); background: var(--bg); color: var(--text); }
+    .filter-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .chip-f { border: 1px solid var(--outline); background: var(--surface); border-radius: 20px; padding: 0.35rem 0.9rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-light); cursor: pointer; }
+    .chip-f.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .empty { text-align: center; color: var(--text-light); padding: 2rem 1rem; font-size: 0.85rem; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+    .kpi { background: var(--surface); border: 1px solid var(--outline-light); border-radius: var(--radius); padding: 1rem; text-align: center; }
+    .kpi b { display: block; font-family: var(--font-heading); font-size: 1.7rem; color: var(--accent); }
+    .kpi span { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); }
+    textarea.tpl { width: 100%; min-height: 180px; font-family: var(--font-body); font-size: 0.85rem; line-height: 1.6; padding: 1rem; border: 1px solid var(--outline-light); border-radius: var(--radius); background: var(--bg); color: var(--text); }
+    .setup-steps li { margin-bottom: 0.6rem; font-size: 0.9rem; color: var(--text-light); }
+    .setup-steps b { color: var(--text); }
+    code.k { background: var(--bg-warm); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.8em; }
+    .note-input { width: 100%; font-family: var(--font-body); font-size: 0.78rem; padding: 0.45rem 0.6rem; border: 1px dashed var(--outline); border-radius: var(--radius); background: var(--bg); margin-top: 0.5rem; color: var(--text); }
+    @media (max-width: 640px) { .sub-row { grid-template-columns: 1fr; } .sub-actions { justify-content: flex-start; } }
+  </style>
+</head>
+<body>
+
+<header class="ops-header">
+  <div class="ops-header-inner">
+    <div class="ops-brand">Operations Desk<small>Inner Narrative Coach</small></div>
+    <nav class="ops-tabs" id="tabs">
+      <button class="ops-tab active" data-tab="today">Today</button>
+      <button class="ops-tab" data-tab="inbox">Inbox <span class="cnt" id="cntInbox">0</span></button>
+      <button class="ops-tab" data-tab="people">People <span class="cnt" id="cntPeople">0</span></button>
+      <button class="ops-tab" data-tab="newsletter">Newsletter</button>
+      <button class="ops-tab" data-tab="playbook">Playbook</button>
+    </nav>
+    <button class="btn btn-accent btn-sm" id="refreshBtn">Refresh</button>
+  </div>
+</header>
+
+<main class="ops-main">
+
+  <!-- SETUP -->
+  <div class="ops-card" id="setupCard">
+    <h2>One-time setup (3 minutes)</h2>
+    <ol class="setup-steps" style="padding-left:1.25rem;list-style:decimal">
+      <li><b>Create a Netlify access token:</b> open <a href="https://app.netlify.com/user/applications#personal-access-tokens" target="_blank" rel="noopener">app.netlify.com &rarr; User settings &rarr; Applications &rarr; Personal access tokens</a>, click <b>New access token</b>, name it "Ops Desk", copy it.</li>
+      <li><b>Paste it below.</b> It is stored only in this browser, never sent anywhere except Netlify's own API.</li>
+      <li><b>Turn on instant email notifications</b> (so you're pinged without opening this page): Netlify &rarr; your site &rarr; <b>Forms &rarr; Notifications &rarr; Add notification &rarr; Email</b>, to annek.vaudour@gmail.com. Do it once per form: newsletter, quiz-results, offer-interest, team-enquiry.</li>
+    </ol>
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem">
+      <input class="field-input" style="flex:1;min-width:260px;margin-bottom:0" type="password" id="tokenInput" placeholder="Paste Netlify personal access token">
+      <button class="btn btn-accent" id="saveToken">Connect</button>
+    </div>
+    <p id="setupMsg" style="margin-top:0.75rem;font-size:0.8rem"></p>
+  </div>
+
+  <!-- TODAY -->
+  <section id="tab-today" class="tabpane">
+    <div class="kpis" id="kpis"></div>
+    <div class="ops-card">
+      <h2>To do today</h2>
+      <div id="todayList"></div>
+    </div>
+    <div class="ops-card">
+      <h2>This week</h2>
+      <div id="weekList"></div>
+    </div>
+  </section>
+
+  <!-- INBOX -->
+  <section id="tab-inbox" class="tabpane" style="display:none">
+    <div class="filter-chips" id="filters">
+      <button class="chip-f active" data-f="all">All</button>
+      <button class="chip-f" data-f="quiz-results">Quiz</button>
+      <button class="chip-f" data-f="offer-interest">Interest</button>
+      <button class="chip-f" data-f="team-enquiry">Teams</button>
+      <button class="chip-f" data-f="newsletter">Letter</button>
+      <button class="chip-f" data-f="open">Open only</button>
+    </div>
+    <div id="inboxList"></div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section id="tab-people" class="tabpane" style="display:none">
+    <div class="ops-card">
+      <h2>Everyone who raised a hand</h2>
+      <p style="font-size:0.82rem;margin-bottom:1rem">Deduplicated by email across all four forms. Export as CSV any time (this is also your migration path to Mailerlite when the list outgrows manual sending).</p>
+      <button class="btn btn-outline btn-sm" id="csvBtn">Export CSV</button>
+      <div id="peopleList" style="margin-top:1.25rem"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="tab-newsletter" class="tabpane" style="display:none">
+    <div class="ops-card">
+      <h2>The Inner Letter, <span id="nlMonth"></span></h2>
+      <p style="font-size:0.85rem">Send on the first Tuesday of each month. Format never changes: one archetype, one client story, one episode, one soft invitation. This month's archetype is chosen by rotation; the draft below is ready to personalise.</p>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin:1rem 0">
+        <button class="btn btn-accent btn-sm" id="bccBtn">Copy recipient list (BCC)</button>
+        <button class="btn btn-outline btn-sm" id="copyNl">Copy draft</button>
+        <button class="btn btn-outline btn-sm" id="mailNl">Open in mail app</button>
+        <button class="btn btn-ghost btn-sm" id="sentNl">Mark this month sent</button>
+      </div>
+      <p style="font-size:0.75rem" id="nlInfo"></p>
+      <h3>Subject</h3>
+      <input class="field-input" id="nlSubject">
+      <h3>Draft</h3>
+      <textarea class="tpl" id="nlBody" style="min-height:320px"></textarea>
+      <p style="font-size:0.75rem;margin-top:0.75rem"><b>Sending rule:</b> up to ~80 recipients, send from Gmail with everyone in BCC and yourself in To. Beyond that, export the CSV from People and import into Mailerlite (free to 1,000 subscribers); this page stays your drafting desk.</p>
+    </div>
+  </section>
+
+  <!-- PLAYBOOK -->
+  <section id="tab-playbook" class="tabpane" style="display:none">
+    <div class="ops-card">
+      <h2>The operating rhythm</h2>
+      <ul style="list-style:disc;padding-left:1.25rem;font-size:0.9rem;color:var(--text-light)">
+        <li style="margin-bottom:0.5rem"><b>Daily (10 min):</b> open Today, clear "Needs reply". Every lead gets a personal answer within 24 hours; speed is the cheapest trust you will ever buy.</li>
+        <li style="margin-bottom:0.5rem"><b>Monday (15 min):</b> This week view: send due follow-ups, welcome the week's new Letter subscribers in one batch.</li>
+        <li style="margin-bottom:0.5rem"><b>First Tuesday (45 min):</b> the Inner Letter: personalise the draft, one true client story, send.</li>
+        <li style="margin-bottom:0.5rem"><b>Follow-up doctrine:</b> exactly one follow-up per interest registration, 7 days later, leading with a gift (a relevant Journal piece), never with a push. One for teams after 3 days. After that, they live on the Letter, which follows up for you every month without pressure.</li>
+        <li><b>Never:</b> more than one ask per email; a follow-up without something of value in it; a reply that could have been written by anyone.</li>
+      </ul>
+    </div>
+    <div class="ops-card">
+      <h2>Email templates</h2>
+      <p style="font-size:0.82rem;margin-bottom:1rem">These are the same templates the Draft Reply buttons use, filled with each person's details automatically. The five-day quiz course is here too; send Day 1 as the reply, then one a day (2 minutes each) until Mailerlite automates it.</p>
+      <div id="tplList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var LS = 'akv-ops-v1';
+  var SITE = 'https://innernarrativecoach.org';
+  var FORMS = ['newsletter','quiz-results','offer-interest','team-enquiry'];
+  var DAY = 86400000;
+
+  var S = load();
+  var subs = [];        // all submissions
+  var activeFilter = 'all';
+
+  function load(){ try { return JSON.parse(localStorage.getItem(LS)) || {}; } catch(e){ return {}; } }
+  function save(){ try { localStorage.setItem(LS, JSON.stringify(S)); } catch(e){} }
+  S.items = S.items || {};   // per-submission: {st:'new|replied|done', fu:'iso', note:''}
+  S.nl = S.nl || {};         // {'2026-04': true}
+
+  /* ---------- archetype content (slim, for quiz replies + newsletter) ---------- */
+  var ARCH = {
+    "The Innocent": { slug:"innocent", ess:"Trust, renewal, and the stubborn belief that life can be good.", q:"What is one difficult thing you have been hoping will resolve itself?", sh:"denial: looking away from what is difficult rather than through it" },
+    "The Everyperson": { slug:"everyperson", ess:"Belonging, realness, and the gift of putting people at ease.", q:"Where in your life are you paying for belonging with silence?", sh:"blending in so well that your own voice goes unheard" },
+    "The Warrior": { slug:"warrior", ess:"Courage, discipline, and the will to see it through.", q:"What are you currently fighting that might not be a fight at all?", sh:"turning everything, even rest, even love, into something to win" },
+    "The Caregiver": { slug:"caregiver", ess:"Generosity, protection, and quiet strength for others.", q:"Who takes care of you, and when did you last let them?", sh:"giving until nothing is left, and then resenting it" },
+    "The Explorer": { slug:"explorer", ess:"Freedom, authenticity, and the pull of the open door.", q:"What might you discover if you stayed, fully, where you already are?", sh:"restlessness that never lets anything take root" },
+    "The Rebel": { slug:"rebel", ess:"Liberation, honesty, and zero patience for broken rules.", q:"What would you build if you were done tearing down?", sh:"burning things down and walking away from the ashes" },
+    "The Lover": { slug:"lover", ess:"Devotion, presence, and a life measured in closeness.", q:"Who are you when no one is watching you with love?", sh:"dissolving into the beloved, whether a person, a project, or an ideal" },
+    "The Creator": { slug:"creator", ess:"Imagination made real, and the ache of the unmade thing.", q:"Which almost-finished thing is waiting for your permission to exist?", sh:"the standard that keeps the work forever almost-ready" },
+    "The Jester": { slug:"jester", ess:"Joy, lightness, and truth smuggled in through laughter.", q:"What would you say plainly, if you could not say it with a joke?", sh:"reaching for the punchline exactly when depth was needed" },
+    "The Sage": { slug:"sage", ess:"Understanding, clarity, and the long patient look beneath the surface.", q:"What do you already understand well enough to act on today?", sh:"understanding life from a safe distance instead of living it" },
+    "The Visionary": { slug:"visionary", ess:"Transformation, pattern-sight, and trust in the unseen.", q:"Which of your visions deserves a first, small, ordinary step this week?", sh:"insight that never touches ground" },
+    "The Ruler": { slug:"ruler", ess:"Order, responsibility, and the weight of holding things together.", q:"What could you hand over this month, and to whom?", sh:"the grip that tightens until it squeezes the life out of what it protects" }
+  };
+  var ROTATION = ["The Innocent","The Everyperson","The Warrior","The Caregiver","The Explorer","The Rebel","The Lover","The Creator","The Jester","The Sage","The Visionary","The Ruler"];
+
+  /* ---------- journal links per offer, for value-first follow-ups ---------- */
+  var GIFT = {
+    "Archetypal Reading": SITE + "/resources.html#epigenetics",
+    "Threshold Package": SITE + "/resources.html#epigenetics",
+    "The Journey": SITE + "/resources.html#art-messages",
+    "Fantasy Portraits": SITE + "/resources.html",
+    "Teams / Workshops": SITE + "/resources.html",
+    "Group Circle Waitlist": SITE + "/resources.html"
+  };
+
+  /* ---------- templates ---------- */
+  function firstName(sub){ var n = (sub.data && (sub.data.name || sub.data.first_name)) || sub.name || ''; return (n.trim().split(/\s+/)[0]) || 'there'; }
+
+  function tplQuiz(sub){
+    var a = (sub.data && sub.data.archetype) || 'your archetype';
+    var A = ARCH[a];
+    var body = 'Hi ' + firstName(sub) + ',\n\n'
+      + 'Thank you for taking the assessment. Your loudest inner voice right now: ' + a + '.\n\n'
+      + (A ? (A.ess + '\n\nThe shadow to watch: ' + A.sh + '.\n\nA question to sit with: ' + A.q + '\n\nThe full portrait lives here: ' + SITE + '/archetype-' + A.slug + '.html\n\n') : '')
+      + 'One thing worth knowing: the quiz shows the loudest voice, not the whole choir. Each of us carries all twelve figures, and the interesting work is usually in the tensions between them, including the archetype you may be avoiding.\n\n'
+      + 'That is what an Archetypal Reading maps: ninety minutes together, and you leave with a Map of your constellation, a Snapshot card, and a Fantasy Portrait of the figure most alive in you. If you are curious: ' + SITE + '/the-reading.html\n\n'
+      + 'And if you simply want to talk first, my discovery call is free and short: ' + SITE + '/call.html\n\n'
+      + 'Warmly,\nAnne\n\nAnne-Kristin Vaudour, Inner Narrative Coach\nSingapore & online · EN · DE · IT';
+    return { subject: 'Your archetype: ' + a + ' (the full portrait)', body: body };
+  }
+
+  function tplInterest(sub){
+    var offers = (sub.data && sub.data.offers) || 'one of my offers';
+    var gift = GIFT[String(offers).split(',')[0].trim()] || (SITE + '/resources.html');
+    var body = 'Hi ' + firstName(sub) + ',\n\n'
+      + 'Thank you for raising your hand for: ' + offers + '. I read every registration personally, and there is no obligation attached to yours.\n\n'
+      + 'Here is what happens next: I will keep you posted about openings and anything genuinely relevant to what you chose, and nothing else.\n\n'
+      + 'One question, so I can point you well when the time comes: what is prompting this now? A sentence is plenty.\n\n'
+      + 'And if it is easier to talk than to type, my discovery call is free, twenty minutes, no pitch: ' + SITE + '/call.html\n\n'
+      + 'Warmly,\nAnne';
+    return { subject: 'Your interest is noted (and one small question)', body: body };
+  }
+
+  function tplTeams(sub){
+    var org = (sub.data && sub.data.organisation) || 'your team';
+    var fmt = (sub.data && sub.data.format) || 'a session';
+    var body = 'Hi ' + firstName(sub) + ',\n\n'
+      + 'Thank you for your enquiry about ' + fmt + ' for ' + org + '.\n\n'
+      + 'The most useful next step is a short scoping call, twenty minutes, so I can shape a proposal around your group rather than send a generic one. You can pick a time here: ' + SITE + '/call.html\n\n'
+      + 'Three things that help me prepare, whenever convenient:\n'
+      + '1. Group size and roles\n'
+      + '2. The occasion and rough date\n'
+      + '3. What you would like people to leave with\n\n'
+      + 'For reference, formats and starting rates: keynote (60-90 min) from S$3,000; half-day workshop from S$4,500; full-day offsite from S$8,000. Final proposals depend on size, format, and travel. Sessions run in English, German, or Italian.\n\n'
+      + 'Looking forward,\nAnne\n\nAnne-Kristin Vaudour · Guest lecturer, Singapore Institute of Technology';
+    return { subject: org + ' × archetypal work: next step', body: body };
+  }
+
+  function tplLetterWelcome(sub){
+    var body = 'Hi,\n\n'
+      + 'Welcome to The Inner Letter. Once a month you will get exactly three things: one archetype explored, one true client story, one podcast episode worth your time. Nothing else, and you can leave anytime.\n\n'
+      + 'Until the first letter arrives, two favourites from the Journal:\n'
+      + '· How Art Carries Universal Messages from the Past: ' + SITE + '/resources.html#art-messages\n'
+      + '· Epigenetics & Boundaries (why you freeze when you know what to say): ' + SITE + '/resources.html#epigenetics\n\n'
+      + 'And if you have two minutes: ' + SITE + '/quiz.html tells you which of the twelve inner figures is loudest in you right now.\n\n'
+      + 'One question, if you feel like answering: what brought you here? I read every reply.\n\n'
+      + 'Warmly,\nAnne';
+    return { subject: 'Welcome to The Inner Letter', body: body };
+  }
+
+  function tplFollowup(sub){
+    var offers = (sub.data && sub.data.offers) || 'what you flagged';
+    var gift = GIFT[String(offers).split(',')[0].trim()] || (SITE + '/resources.html');
+    var body = 'Hi ' + firstName(sub) + ',\n\n'
+      + 'A week ago you registered interest in ' + offers + '. No push from me, just one thing that might serve you while you decide:\n\n'
+      + gift + '\n\n'
+      + 'If a conversation would help, the discovery call stays free and short: ' + SITE + '/call.html. And if the timing is simply not now, that is a complete answer too, you will stay on the Letter and hear from me monthly, gently.\n\n'
+      + 'Glad you are here either way,\nAnne';
+    return { subject: 'A small thing that may help (' + String(offers).split(',')[0].trim() + ')', body: body };
+  }
+
+  function courseTpl(day){
+    var c = {
+      1: ['Day 1 · Your result, properly read', 'Yesterday the quiz named your loudest inner voice. Today, one clarification that changes everything: the result is weather, not climate. The archetype speaking loudest right now is answering the season you are in, not defining who you are. Tomorrow: the whole constellation. Meanwhile, re-read your portrait once more and notice which single line stung slightly. That line is doing work: [link to their archetype page].'],
+      2: ['Day 2 · The constellation', 'You carry all twelve figures: the Caregiver and the Rebel, the Sage and the Jester, all of them. Maturity is not choosing one; it is knowing which one is driving before it takes the wheel. Browse the full library and notice which TWO portraits you feel drawn to read: ' + SITE + '/archetypes.html. The pair is rarely an accident.'],
+      3: ['Day 3 · The figure you avoid', 'Here is the uncomfortable one. For every archetype we lead with, there is one we keep in the basement, and it runs more of our life from down there than the ones upstairs. Quick test: which of the twelve portraits did you skip, or read with mild irritation? Sit with this question today: what would that figure do with the decision you are currently postponing?'],
+      4: ['Day 4 · What a Reading changed', 'A short true story. A client came to me stuck between a safe career and an old ambition, four years of postponing. The Reading surfaced what the lists and pro-cons never could: the deciding voice was not hers. Ninety minutes did not make the decision, but it showed who was making it, and that changed everything. (Details changed for privacy; the pattern is universal.)'],
+      5: ['Day 5 · The invitation', 'Five days, twelve figures, one question left: do you want the whole map? The Archetypal Reading is ninety minutes, and you leave with your Map, a Snapshot card, and a Fantasy Portrait of the figure most alive in you: ' + SITE + '/the-reading.html. If you prefer to start with a conversation, my discovery call is free: ' + SITE + '/call.html. And if now is not the time, the Letter continues monthly, no pressure ever. Thank you for walking these five days with me. Anne']
+    }[day];
+    return { subject: 'The Inner Letter course · ' + c[0], body: c[1] };
+  }
+
+  function templateFor(sub){
+    switch(sub.form){
+      case 'quiz-results': return tplQuiz(sub);
+      case 'offer-interest': return tplInterest(sub);
+      case 'team-enquiry': return tplTeams(sub);
+      case 'newsletter': return tplLetterWelcome(sub);
+    }
+  }
+
+  /* ---------- Netlify API ---------- */
+  function api(path){
+    return fetch('https://api.netlify.com/api/v1' + path + (path.indexOf('?')>-1?'&':'?') + 'access_token=' + encodeURIComponent(S.token))
+      .then(function(r){ if(!r.ok) throw new Error('Netlify API ' + r.status); return r.json(); });
+  }
+
+  function refresh(){
+    if (!S.token) return;
+    document.getElementById('refreshBtn').textContent = 'Loading…';
+    api('/forms').then(function(forms){
+      var mine = forms.filter(function(f){ return FORMS.indexOf(f.name) > -1; });
+      return Promise.all(mine.map(function(f){
+        return api('/forms/' + f.id + '/submissions?per_page=100').then(function(list){
+          return list.map(function(x){ return {
+            id: x.id, form: f.name,
+            email: (x.email || (x.data && x.data.email) || '').toLowerCase(),
+            name: x.name || (x.data && x.data.name) || '',
+            data: x.data || {}, at: new Date(x.created_at)
+          };});
+        });
+      }));
+    }).then(function(lists){
+      subs = [].concat.apply([], lists).sort(function(a,b){ return b.at - a.at; });
+      subs.forEach(function(s){
+        if (!S.items[s.id]) S.items[s.id] = { st: 'new', fu: null, note: '' };
+      });
+      save();
+      document.getElementById('setupCard').style.display = 'none';
+      renderAll();
+      document.getElementById('refreshBtn').textContent = 'Refresh';
+    }).catch(function(e){
+      document.getElementById('refreshBtn').textContent = 'Refresh';
+      document.getElementById('setupCard').style.display = 'block';
+      document.getElementById('setupMsg').innerHTML = '<b style="color:#B4432B">Could not connect:</b> ' + e.message + '. Check the token and try again.';
+    });
+  }
+
+  /* ---------- helpers ---------- */
+  function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function ageOf(s){ var h = Math.floor((Date.now()-s.at)/3600000); return h<24 ? h+'h' : Math.floor(h/24)+'d'; }
+  function isLead(s){ return s.form !== 'newsletter'; }
+  function overdue(s){ return isLead(s) && S.items[s.id].st==='new' && (Date.now()-s.at) > DAY; }
+  function typeTag(f){ return {'quiz-results':'<span class="tag tag-quiz">Quiz</span>','offer-interest':'<span class="tag tag-interest">Interest</span>','team-enquiry':'<span class="tag tag-teams">Teams</span>','newsletter':'<span class="tag tag-letter">Letter</span>'}[f]; }
+  function detailOf(s){
+    if (s.form==='quiz-results') return 'Archetype: ' + esc(s.data.archetype || '?');
+    if (s.form==='offer-interest') return 'Wants: ' + esc(s.data.offers || '?') + (s.data.language ? ' · ' + esc(s.data.language) : '') + (s.data.message ? ' · "' + esc(s.data.message) + '"' : '');
+    if (s.form==='team-enquiry') return esc(s.data.organisation||'') + ' · ' + esc(s.data.format||'') + (s.data.message ? ' · "' + esc(s.data.message) + '"' : '');
+    return 'Joined from ' + esc(s.data.source || 'the site');
+  }
+  function mailto(s){
+    var t = templateFor(s);
+    return 'mailto:' + encodeURIComponent(s.email) + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+  }
+  function copyText(txt, btn){
+    navigator.clipboard.writeText(txt).then(function(){ var o = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(function(){ btn.textContent = o; }, 1500); });
+  }
+  function monthKey(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'); }
+
+  /* ---------- render ---------- */
+  function rowHtml(s, showStatus){
+    var it = S.items[s.id];
+    var cls = overdue(s) ? 'overdue' : (it.st==='new' ? 'new-item' : '');
+    var ageCls = overdue(s) ? 'tag-over' : 'tag-age';
+    return '<div class="sub-row ' + cls + '" data-id="' + s.id + '">' +
+      '<div><div class="sub-who">' + typeTag(s.form) + esc(s.name || s.email) + '</div>' +
+      '<div class="sub-meta">' + esc(s.email) + ' · <span class="tag ' + ageCls + '">' + ageOf(s) + ' ago</span>' + (it.fu ? ' · follow-up ' + it.fu.slice(5) : '') + '</div>' +
+      '<div class="sub-detail">' + detailOf(s) + '</div>' +
+      (it.note ? '<div class="sub-detail">📝 ' + esc(it.note) + '</div>' : '') + '</div>' +
+      '<div class="sub-actions">' +
+      '<a class="btn btn-accent btn-sm" href="' + mailto(s) + '" data-act="reply" data-id="' + s.id + '">Draft Reply</a>' +
+      '<button class="btn btn-outline btn-sm" data-act="copy" data-id="' + s.id + '">Copy</button>' +
+      (showStatus ? '<select class="status-sel" data-act="status" data-id="' + s.id + '">' +
+        ['new','replied','done'].map(function(v){ return '<option value="'+v+'"'+(it.st===v?' selected':'')+'>'+v+'</option>'; }).join('') + '</select>' +
+        '<button class="btn btn-ghost btn-sm" data-act="note" data-id="' + s.id + '">Note</button>' : '') +
+      '</div></div>';
+  }
+
+  function renderAll(){
+    var open = subs.filter(function(s){ return isLead(s) && S.items[s.id].st === 'new'; });
+    var fuDue = subs.filter(function(s){ var it=S.items[s.id]; return it.fu && it.st!=='done' && it.fu <= new Date().toISOString().slice(0,10); });
+    var fuWeek = subs.filter(function(s){ var it=S.items[s.id]; var lim = new Date(Date.now()+7*DAY).toISOString().slice(0,10); return it.fu && it.st!=='done' && it.fu > new Date().toISOString().slice(0,10) && it.fu <= lim; });
+    var people = dedupe();
+    var now = new Date();
+    var weekAgo = new Date(Date.now()-7*DAY);
+    var newLetter = subs.filter(function(s){ return s.form==='newsletter' && s.at > weekAgo && S.items[s.id].st==='new'; });
+
+    // KPIs
+    document.getElementById('kpis').innerHTML =
+      '<div class="kpi"><b>' + people.length + '</b><span>people on list</span></div>' +
+      '<div class="kpi"><b>' + open.length + '</b><span>need reply</span></div>' +
+      '<div class="kpi"><b>' + (fuDue.length) + '</b><span>follow-ups due</span></div>' +
+      '<div class="kpi"><b>' + subs.filter(function(s){ return s.at > weekAgo; }).length + '</b><span>new this week</span></div>';
+
+    // Today
+    var t = '';
+    if (!S.nl[monthKey(now)] && now.getDate() >= 1) {
+      t += '<div class="sub-row new-item"><div><div class="sub-who">📮 Send The Inner Letter for ' + now.toLocaleString('en',{month:'long'}) + '</div><div class="sub-detail">Draft is ready in the Newsletter tab. Due: first Tuesday of the month.</div></div><div class="sub-actions"><button class="btn btn-accent btn-sm" data-goto="newsletter">Open Draft</button></div></div>';
+    }
+    open.slice(0, 20).forEach(function(s){ t += rowHtml(s, true); });
+    fuDue.forEach(function(s){ t += '<div class="sub-row overdue"><div><div class="sub-who">🔁 Follow-up: ' + esc(s.name||s.email) + '</div><div class="sub-detail">' + detailOf(s) + '</div></div><div class="sub-actions"><a class="btn btn-accent btn-sm" href="' + fuMailto(s) + '" data-act="fu-done" data-id="' + s.id + '">Draft Follow-up</a></div></div>'; });
+    document.getElementById('todayList').innerHTML = t || '<div class="empty">Nothing due. Enjoy the quiet, or write next month’s Letter early.</div>';
+
+    // Week
+    var w = '';
+    if (newLetter.length) w += '<div class="sub-row"><div><div class="sub-who">👋 Welcome ' + newLetter.length + ' new Letter subscriber' + (newLetter.length>1?'s':'') + '</div><div class="sub-detail">One warm batch welcome each, 2 minutes. Use Draft Reply in the Inbox (filter: Letter).</div></div><div class="sub-actions"><button class="btn btn-outline btn-sm" data-goto="inbox">Open Inbox</button></div></div>';
+    fuWeek.forEach(function(s){ w += '<div class="sub-row"><div><div class="sub-who">🔁 ' + esc(s.name||s.email) + '</div><div class="sub-meta">follow-up on ' + S.items[s.id].fu + '</div><div class="sub-detail">' + detailOf(s) + '</div></div></div>'; });
+    document.getElementById('weekList').innerHTML = w || '<div class="empty">No scheduled items this week.</div>';
+
+    // Inbox
+    var list = subs.filter(function(s){
+      if (activeFilter === 'all') return true;
+      if (activeFilter === 'open') return S.items[s.id].st !== 'done';
+      return s.form === activeFilter;
+    });
+    document.getElementById('inboxList').innerHTML = list.map(function(s){ return rowHtml(s, true); }).join('') || '<div class="empty">No submissions yet. They will appear here the moment someone fills a form on the site.</div>';
+    document.getElementById('cntInbox').textContent = open.length;
+
+    // People
+    document.getElementById('cntPeople').textContent = people.length;
+    document.getElementById('peopleList').innerHTML = people.map(function(p){
+      return '<div class="sub-row"><div><div class="sub-who">' + esc(p.name || p.email) + '</div>' +
+        '<div class="sub-meta">' + esc(p.email) + ' · first seen ' + p.first.toISOString().slice(0,10) + '</div>' +
+        '<div class="sub-detail">' + p.tags.map(function(x){ return esc(x); }).join(' · ') + '</div></div>' +
+        '<div class="sub-actions"><a class="btn btn-outline btn-sm" href="mailto:' + encodeURIComponent(p.email) + '">Email</a></div></div>';
+    }).join('') || '<div class="empty">No one yet.</div>';
+
+    renderNewsletter(people);
+  }
+
+  function fuMailto(s){
+    var t = s.form === 'team-enquiry' ? tplTeams(s) : tplFollowup(s);
+    return 'mailto:' + encodeURIComponent(s.email) + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+  }
+
+  function dedupe(){
+    var by = {};
+    subs.slice().reverse().forEach(function(s){
+      if (!s.email) return;
+      var p = by[s.email] = by[s.email] || { email: s.email, name: '', first: s.at, tags: [] };
+      if (s.name && !p.name) p.name = s.name;
+      if (s.at < p.first) p.first = s.at;
+      var tag = {'newsletter':'Letter','quiz-results':'Quiz: ' + (s.data.archetype||''),'offer-interest':'Interest: ' + (s.data.offers||''),'team-enquiry':'Teams'}[s.form];
+      if (tag && p.tags.indexOf(tag) === -1) p.tags.push(tag);
+    });
+    return Object.keys(by).map(function(k){ return by[k]; }).sort(function(a,b){ return b.first - a.first; });
+  }
+
+  /* ---------- newsletter ---------- */
+  function nlRecipients(people){
+    return people.filter(function(p){
+      return p.tags.some(function(t){ return t === 'Letter' || t.indexOf('Quiz') === 0 || t.indexOf('Interest') === 0; });
+    }).map(function(p){ return p.email; });
+  }
+
+  function renderNewsletter(people){
+    var now = new Date();
+    var mk = monthKey(now);
+    var arch = ROTATION[now.getMonth() % 12];
+    var A = ARCH[arch];
+    var rec = nlRecipients(people);
+    document.getElementById('nlMonth').textContent = now.toLocaleString('en',{month:'long', year:'numeric'});
+    document.getElementById('nlInfo').textContent = rec.length + ' recipients · ' + (S.nl[mk] ? 'SENT this month ✓' : 'not yet sent this month');
+    if (!document.getElementById('nlSubject').value) {
+      document.getElementById('nlSubject').value = 'The Inner Letter · ' + arch + ', a true story, and one episode';
+      document.getElementById('nlBody').value =
+'Hi,\n\nOne archetype, one story, one episode. Here is ' + now.toLocaleString('en',{month:'long'}) + '.\n\n' +
+'THE ARCHETYPE · ' + arch + '\n' + A.ess + '\nThe shadow to watch: ' + A.sh + '.\n' +
+'A question to sit with this month: ' + A.q + '\n' +
+'Full portrait: ' + SITE + '/archetype-' + A.slug + '.html\n\n' +
+'THE STORY\n[Two or three sentences about one real client shift this month, anonymised. What were they circling, what changed, what did it make possible? Specific beats general: one detail readers can feel.]\n\n' +
+'THE EPISODE\n[One episode of The Big WHY Podcast, yours or one you loved, with one sentence on why it fits this month’s archetype.] ' + SITE + '/podcast.html\n\n' +
+'One line before I go: if this month’s figure felt uncomfortably accurate, that is usually the invitation. The Reading maps the whole constellation: ' + SITE + '/the-reading.html\n\n' +
+'Warmly,\nAnne\n\nYou are receiving this because you joined The Inner Letter, took the archetype quiz, or registered interest at ' + SITE.replace('https://','') + '. Reply “unsubscribe” and I will remove you the same day.';
+    }
+    document.getElementById('bccBtn').onclick = function(){ copyText(rec.join(', '), this); };
+    document.getElementById('copyNl').onclick = function(){ copyText('Subject: ' + document.getElementById('nlSubject').value + '\n\n' + document.getElementById('nlBody').value, this); };
+    document.getElementById('mailNl').onclick = function(){
+      location.href = 'mailto:annek.vaudour@gmail.com?bcc=' + encodeURIComponent(rec.join(',')) + '&subject=' + encodeURIComponent(document.getElementById('nlSubject').value) + '&body=' + encodeURIComponent(document.getElementById('nlBody').value);
+    };
+    document.getElementById('sentNl').onclick = function(){ S.nl[mk] = true; save(); renderAll(); };
+  }
+
+  /* ---------- playbook templates listing ---------- */
+  function renderTemplates(){
+    var demo = { name: '{first name}', email: '{email}', data: { archetype: 'The Sage', offers: 'Threshold Package', organisation: '{organisation}', format: 'Workshop (half day)', source: 'index.html' }, form: '' };
+    var items = [
+      ['Quiz result reply (sent within 24h)', tplQuiz(Object.assign({}, demo, {form:'quiz-results'}))],
+      ['Interest acknowledgement (sent within 24h)', tplInterest(Object.assign({}, demo, {form:'offer-interest'}))],
+      ['Teams enquiry reply (same business day)', tplTeams(Object.assign({}, demo, {form:'team-enquiry'}))],
+      ['Letter welcome (weekly batch)', tplLetterWelcome(demo)],
+      ['Interest follow-up (+7 days, value first)', tplFollowup(Object.assign({}, demo, {form:'offer-interest'}))],
+      ['Course · Day 1', courseTpl(1)], ['Course · Day 2', courseTpl(2)], ['Course · Day 3', courseTpl(3)],
+      ['Course · Day 4', courseTpl(4)], ['Course · Day 5', courseTpl(5)]
+    ];
+    document.getElementById('tplList').innerHTML = items.map(function(it, i){
+      return '<h3>' + it[0] + '</h3><textarea class="tpl" readonly id="tpl'+i+'">Subject: ' + it[1].subject + '\n\n' + it[1].body + '</textarea>' +
+        '<button class="btn btn-outline btn-sm" style="margin:0.5rem 0 1rem" data-copytpl="tpl'+i+'">Copy</button>';
+    }).join('');
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-act],[data-goto],[data-copytpl],.ops-tab,.chip-f');
+    if (!el) return;
+    if (el.classList.contains('ops-tab')) {
+      document.querySelectorAll('.ops-tab').forEach(function(b){ b.classList.remove('active'); });
+      el.classList.add('active');
+      document.querySelectorAll('.tabpane').forEach(function(p){ p.style.display = 'none'; });
+      document.getElementById('tab-' + el.dataset.tab).style.display = 'block';
+      return;
+    }
+    if (el.classList.contains('chip-f')) {
+      document.querySelectorAll('.chip-f').forEach(function(b){ b.classList.remove('active'); });
+      el.classList.add('active'); activeFilter = el.dataset.f; renderAll(); return;
+    }
+    if (el.dataset.goto) { document.querySelector('.ops-tab[data-tab="' + el.dataset.goto + '"]').click(); return; }
+    if (el.dataset.copytpl) { copyText(document.getElementById(el.dataset.copytpl).value, el); return; }
+    var id = el.dataset.id, it = id && S.items[id];
+    if (el.dataset.act === 'reply' && it) {
+      it.st = 'replied';
+      var s = subs.find(function(x){ return x.id === id; });
+      if (s && s.form === 'offer-interest') it.fu = new Date(Date.now()+7*DAY).toISOString().slice(0,10);
+      if (s && s.form === 'team-enquiry') it.fu = new Date(Date.now()+3*DAY).toISOString().slice(0,10);
+      save(); setTimeout(renderAll, 400); // let mailto open first
+    }
+    if (el.dataset.act === 'fu-done' && it) { it.fu = null; it.st = 'done'; save(); setTimeout(renderAll, 400); }
+    if (el.dataset.act === 'copy') {
+      var s2 = subs.find(function(x){ return x.id === id; });
+      var t = templateFor(s2); copyText('To: ' + s2.email + '\nSubject: ' + t.subject + '\n\n' + t.body, el);
+    }
+    if (el.dataset.act === 'note' && it) {
+      var n = prompt('Note for this person:', it.note || '');
+      if (n !== null) { it.note = n; save(); renderAll(); }
+    }
+  });
+  document.addEventListener('change', function(e){
+    if (e.target.dataset && e.target.dataset.act === 'status') {
+      S.items[e.target.dataset.id].st = e.target.value; save(); renderAll();
+    }
+  });
+  document.getElementById('refreshBtn').addEventListener('click', refresh);
+  document.getElementById('saveToken').addEventListener('click', function(){
+    var v = document.getElementById('tokenInput').value.trim();
+    if (!v) return;
+    S.token = v; save(); refresh();
+  });
+  document.getElementById('csvBtn').addEventListener('click', function(){
+    var people = dedupe();
+    var csv = 'email,name,first_seen,tags\n' + people.map(function(p){
+      return '"' + p.email + '","' + (p.name||'').replace(/"/g,'""') + '","' + p.first.toISOString().slice(0,10) + '","' + p.tags.join('; ').replace(/"/g,'""') + '"';
+    }).join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+    a.download = 'inner-narrative-list.csv';
+    a.click();
+  });
+
+  renderTemplates();
+  if (S.token) refresh(); else document.getElementById('setupCard').style.display = 'block';
+})();
+</script>
+</body>
+</html>
