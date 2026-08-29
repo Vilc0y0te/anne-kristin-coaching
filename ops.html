@@ -452,7 +452,7 @@
       return '<div class="sub-row"><div><div class="sub-who">' + esc(p.name || p.email) + '</div>' +
         '<div class="sub-meta">' + esc(p.email) + ' · first seen ' + p.first.toISOString().slice(0,10) + '</div>' +
         '<div class="sub-detail">' + p.tags.map(function(x){ return esc(x); }).join(' · ') + '</div></div>' +
-        '<div class="sub-actions"><a class="btn btn-outline btn-sm" href="mailto:' + encodeURIComponent(p.email) + '">Email</a></div></div>';
+        '<div class="sub-actions"><button class="btn btn-outline btn-sm" data-mailperson="' + esc(p.email) + '" data-pname="' + esc((p.name||'').split(' ')[0]) + '">Email</button></div></div>';
     }).join('') || '<div class="empty">No one yet.</div>';
 
     renderNewsletter(people);
@@ -533,7 +533,7 @@
 
   /* ---------- events ---------- */
   document.addEventListener('click', function(e){
-    var el = e.target.closest('[data-act],[data-goto],[data-copytpl],.ops-tab,.chip-f');
+    var el = e.target.closest('[data-act],[data-goto],[data-copytpl],[data-mailperson],.ops-tab,.chip-f');
     if (!el) return;
     if (el.classList.contains('ops-tab')) {
       document.querySelectorAll('.ops-tab').forEach(function(b){ b.classList.remove('active'); });
@@ -547,6 +547,14 @@
       el.classList.add('active'); activeFilter = el.dataset.f; renderAll(); return;
     }
     if (el.dataset.goto) { document.querySelector('.ops-tab[data-tab="' + el.dataset.goto + '"]').click(); return; }
+    if (el.dataset.mailperson) {
+      var pn = el.dataset.pname || 'there';
+      openComposer(el.dataset.mailperson, {
+        subject: 'A note from Anne',
+        body: 'Hi ' + pn + ',\n\n\n\nWarmly,\nAnne\n\nAnne-Kristin Vaudour, Inner Narrative Coach\nSingapore & online · EN · DE · IT'
+      }, function(){});
+      return;
+    }
     if (el.dataset.copytpl) { copyText(document.getElementById(el.dataset.copytpl).value, el); return; }
     var id = el.dataset.id, it = id && S.items[id];
     if (el.dataset.act === 'reply' && it) {
