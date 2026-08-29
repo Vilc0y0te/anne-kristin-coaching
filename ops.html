@@ -35,6 +35,7 @@
     .tag-interest { background: var(--accent-light); color: var(--accent-hover); }
     .tag-teams { background: #DDEAE2; color: #2F6247; }
     .tag-letter { background: #E4E9F0; color: #3A5A82; }
+    .tag-call { background: #F3E8D8; color: #8A5A1F; }
     .tag-age { background: var(--bg-warm); color: var(--text-light); }
     .tag-over { background: #F5DBD3; color: #B4432B; }
     .btn-sm { padding: 0.45rem 0.9rem; font-size: 0.62rem; }
@@ -81,8 +82,10 @@
       <li><b>Paste it below.</b> It is stored only in this browser, never sent anywhere except Netlify's own API.</li>
       <li><b>Turn on instant email notifications</b> (so you're pinged without opening this page): Netlify &rarr; your site &rarr; <b>Forms &rarr; Notifications &rarr; Add notification &rarr; Email</b>, to annek.vaudour@gmail.com. Do it once per form: newsletter, quiz-results, offer-interest, team-enquiry.</li>
     </ol>
+    <p style="font-size:0.85rem;margin-top:0.75rem"><b>Optional, to see discovery-call bookings here too:</b> in Calendly go to <b>Integrations &amp; apps &rarr; API &amp; webhooks &rarr; Generate personal access token</b>. In Netlify: <b>Site configuration &rarr; Environment variables</b>, add <code class="k">CALENDLY_TOKEN</code> (the Calendly token) and <code class="k">OPS_KEY</code> (any passphrase you invent), then <b>Deploys &rarr; Trigger deploy</b>. Enter the same passphrase below.</p>
     <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem">
-      <input class="field-input" style="flex:1;min-width:260px;margin-bottom:0" type="password" id="tokenInput" placeholder="Paste Netlify personal access token">
+      <input class="field-input" style="flex:1;min-width:220px;margin-bottom:0" type="password" id="tokenInput" placeholder="Netlify personal access token">
+      <input class="field-input" style="flex:1;min-width:180px;margin-bottom:0" type="password" id="opsKeyInput" placeholder="Ops key (optional, for Calendly)">
       <button class="btn btn-accent" id="saveToken">Connect</button>
     </div>
     <p id="setupMsg" style="margin-top:0.75rem;font-size:0.8rem"></p>
@@ -91,6 +94,7 @@
   <!-- TODAY -->
   <section id="tab-today" class="tabpane">
     <div class="kpis" id="kpis"></div>
+    <div class="ops-card" id="calNote" style="display:none;font-size:0.8rem;color:#B4432B"></div>
     <div class="ops-card">
       <h2>To do today</h2>
       <div id="todayList"></div>
@@ -108,6 +112,7 @@
       <button class="chip-f" data-f="quiz-results">Quiz</button>
       <button class="chip-f" data-f="offer-interest">Interest</button>
       <button class="chip-f" data-f="team-enquiry">Teams</button>
+      <button class="chip-f" data-f="call-booking">Calls</button>
       <button class="chip-f" data-f="newsletter">Letter</button>
       <button class="chip-f" data-f="open">Open only</button>
     </div>
@@ -304,12 +309,34 @@
     return { subject: 'The Inner Letter course · ' + c[0], body: c[1] };
   }
 
+  function tplCallAck(sub){
+    var when = sub.data && sub.data.start ? new Date(sub.data.start).toLocaleString('en-SG', {weekday:'long', day:'numeric', month:'long', hour:'2-digit', minute:'2-digit'}) : 'our call';
+    var body = 'Hi ' + firstName(sub) + ',\n\n'
+      + 'I saw your booking come in for ' + when + ', and I am looking forward to it. Calendly will have sent you the video link; this note is just me, personally.\n\n'
+      + 'To make our twenty minutes count double, one question to sit with before we speak:\n\n'
+      + 'What is the decision or question in your life that, if it became clear, would make everything else easier?\n\n'
+      + 'A sentence in reply is plenty, and there are no wrong answers. If you have two spare minutes, the archetype quiz gives us a shared starting point: ' + SITE + '/quiz.html — if you take it, tell me your result.\n\n'
+      + 'If anything changes, the reschedule link is in your invite.\n\n'
+      + 'See you soon,\nAnne\n\nAnne-Kristin Vaudour, Inner Narrative Coach\nSingapore & online · EN · DE · IT';
+    return { subject: 'Before we speak: one small question', body: body };
+  }
+
+  function tplPostCall(sub){
+    var body = 'Hi ' + firstName(sub) + ',\n\n'
+      + 'Thank you for yesterday\u2019s conversation. I have been thinking about what you shared, and I meant what I said: naming the question is already half the work.\n\n'
+      + 'If you would like to take the next step, the Archetypal Reading is where it begins: ninety minutes, and you leave with your Map, a Snapshot card, and a Portrait of the figure most alive in you. Everything is here: ' + SITE + '/the-reading.html\n\n'
+      + 'And if the timing is not now, that is a complete answer too. The Inner Letter will keep us gently in touch, once a month.\n\n'
+      + 'Whatever you decide, I am glad we spoke.\n\nWarmly,\nAnne';
+    return { subject: 'After our conversation', body: body };
+  }
+
   function templateFor(sub){
     switch(sub.form){
       case 'quiz-results': return tplQuiz(sub);
       case 'offer-interest': return tplInterest(sub);
       case 'team-enquiry': return tplTeams(sub);
       case 'newsletter': return tplLetterWelcome(sub);
+      case 'call-booking': return tplCallAck(sub);
     }
   }
 
@@ -341,7 +368,27 @@
         });
       }));
     }).then(function(lists){
-      subs = [].concat.apply([], lists).sort(function(a,b){ return b.at - a.at; });
+      var merged = [].concat.apply([], lists);
+      var calFetch = S.opsKey
+        ? fetch('/.netlify/functions/calendly', { headers: { 'Authorization': 'Bearer ' + S.opsKey } })
+            .then(function(r){ return r.json(); })
+            .catch(function(){ return { error: 'bridge unreachable' }; })
+        : Promise.resolve(null);
+      return calFetch.then(function(cal){
+        var note = document.getElementById('calNote');
+        if (cal && cal.error) { if (note) { note.style.display = 'block'; note.textContent = 'Calendly bridge: ' + cal.error + ' (check OPS_KEY / CALENDLY_TOKEN env vars and redeploy).'; } }
+        else if (note) { note.style.display = 'none'; }
+        if (cal && cal.bookings) {
+          cal.bookings.forEach(function(b){
+            if (b.invitee_status === 'canceled' || b.event_status === 'canceled') return;
+            merged.push({ id: b.id, form: 'call-booking', email: b.email, name: b.name,
+              data: { start: b.start_time }, at: new Date(b.created_at) });
+          });
+        }
+        return merged;
+      });
+    }).then(function(merged){
+      subs = merged.sort(function(a,b){ return b.at - a.at; });
       subs.forEach(function(s){
         if (!S.items[s.id]) S.items[s.id] = { st: 'new', fu: null, note: '' };
       });
@@ -361,11 +408,12 @@
   function ageOf(s){ var h = Math.floor((Date.now()-s.at)/3600000); return h<24 ? h+'h' : Math.floor(h/24)+'d'; }
   function isLead(s){ return s.form !== 'newsletter'; }
   function overdue(s){ return isLead(s) && S.items[s.id].st==='new' && (Date.now()-s.at) > DAY; }
-  function typeTag(f){ return {'quiz-results':'<span class="tag tag-quiz">Quiz</span>','offer-interest':'<span class="tag tag-interest">Interest</span>','team-enquiry':'<span class="tag tag-teams">Teams</span>','newsletter':'<span class="tag tag-letter">Letter</span>'}[f]; }
+  function typeTag(f){ return {'quiz-results':'<span class="tag tag-quiz">Quiz</span>','offer-interest':'<span class="tag tag-interest">Interest</span>','team-enquiry':'<span class="tag tag-teams">Teams</span>','newsletter':'<span class="tag tag-letter">Letter</span>','call-booking':'<span class="tag tag-call">Call</span>'}[f]; }
   function detailOf(s){
     if (s.form==='quiz-results') return 'Archetype: ' + esc(s.data.archetype || '?');
     if (s.form==='offer-interest') return 'Wants: ' + esc(s.data.offers || '?') + (s.data.language ? ' · ' + esc(s.data.language) : '') + (s.data.message ? ' · "' + esc(s.data.message) + '"' : '');
     if (s.form==='team-enquiry') return esc(s.data.organisation||'') + ' · ' + esc(s.data.format||'') + (s.data.message ? ' · "' + esc(s.data.message) + '"' : '');
+    if (s.form==='call-booking') return 'Discovery call: ' + (s.data.start ? new Date(s.data.start).toLocaleString('en-SG', {weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : '?');
     return 'Joined from ' + esc(s.data.source || 'the site');
   }
   /* ---------- composer ---------- */
@@ -459,6 +507,7 @@
   }
 
   function fuTemplate(s){
+    if (s.form === 'call-booking') return tplPostCall(s);
     return s.form === 'team-enquiry' ? tplTeams(s) : tplFollowup(s);
   }
 
@@ -469,7 +518,7 @@
       var p = by[s.email] = by[s.email] || { email: s.email, name: '', first: s.at, tags: [] };
       if (s.name && !p.name) p.name = s.name;
       if (s.at < p.first) p.first = s.at;
-      var tag = {'newsletter':'Letter','quiz-results':'Quiz: ' + (s.data.archetype||''),'offer-interest':'Interest: ' + (s.data.offers||''),'team-enquiry':'Teams'}[s.form];
+      var tag = {'newsletter':'Letter','quiz-results':'Quiz: ' + (s.data.archetype||''),'offer-interest':'Interest: ' + (s.data.offers||''),'team-enquiry':'Teams','call-booking':'Call'}[s.form];
       if (tag && p.tags.indexOf(tag) === -1) p.tags.push(tag);
     });
     return Object.keys(by).map(function(k){ return by[k]; }).sort(function(a,b){ return b.first - a.first; });
@@ -522,6 +571,8 @@
       ['Teams enquiry reply (same business day)', tplTeams(Object.assign({}, demo, {form:'team-enquiry'}))],
       ['Letter welcome (weekly batch)', tplLetterWelcome(demo)],
       ['Interest follow-up (+7 days, value first)', tplFollowup(Object.assign({}, demo, {form:'offer-interest'}))],
+      ['Call booking acknowledgment (sent when a booking lands)', tplCallAck(Object.assign({}, demo, {form:'call-booking', data:{start:new Date(Date.now()+3*864e5).toISOString()}}))],
+      ['Post-call follow-up (day after the call)', tplPostCall(Object.assign({}, demo, {form:'call-booking'}))],
       ['Course · Day 1', courseTpl(1)], ['Course · Day 2', courseTpl(2)], ['Course · Day 3', courseTpl(3)],
       ['Course · Day 4', courseTpl(4)], ['Course · Day 5', courseTpl(5)]
     ];
@@ -563,6 +614,7 @@
         it.st = 'replied';
         if (s.form === 'offer-interest') it.fu = new Date(Date.now()+7*DAY).toISOString().slice(0,10);
         if (s.form === 'team-enquiry') it.fu = new Date(Date.now()+3*DAY).toISOString().slice(0,10);
+        if (s.form === 'call-booking') it.fu = new Date((s.data.start ? new Date(s.data.start).getTime() : Date.now()) + DAY).toISOString().slice(0,10);
         save(); renderAll();
       });
     }
@@ -589,8 +641,11 @@
   document.getElementById('refreshBtn').addEventListener('click', refresh);
   document.getElementById('saveToken').addEventListener('click', function(){
     var v = document.getElementById('tokenInput').value.trim();
-    if (!v) return;
-    S.token = v; save(); refresh();
+    var k = document.getElementById('opsKeyInput').value.trim();
+    if (k) S.opsKey = k;
+    if (v) S.token = v;
+    if (!S.token) return;
+    save(); refresh();
   });
   document.getElementById('csvBtn').addEventListener('click', function(){
     var people = dedupe();

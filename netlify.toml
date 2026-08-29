@@ -27,3 +27,6 @@
   from = "/*"
   to = "/index.html"
   status = 404
+
+[functions]
+  directory = "netlify/functions"
