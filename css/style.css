@@ -313,6 +313,13 @@ strong { font-weight: 600; color: var(--text); }
   width: 100%;
   display: block;
 }
+@media (min-width: 769px) {
+  .swan-img img {
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
 .swan-text {
   position: absolute;
   top: 0;
@@ -1244,3 +1251,10 @@ strong { font-weight: 600; color: var(--text); }
 }
 .check-row strong { display: block; }
 .check-row .check-sub { font-size: 0.82rem; color: var(--text-light); }
+
+/* Swan banner text, narrow desktop (after base rules so it wins) */
+@media (min-width: 769px) and (max-width: 1000px) {
+  .swan-text { padding: 1.5rem; }
+  .swan-quote { font-size: 1.15rem; margin-bottom: 1rem; }
+  .swan-text p { font-size: 0.92rem; line-height: 1.55; }
+}
