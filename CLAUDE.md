@@ -50,7 +50,7 @@ always the next step down the spine.
 - interest.html — offer-interest form + newsletter signup landing
 - for-teams.html — corporate offers (keynote from S$3,000, half-day S$4,500,
   full-day S$8,000) + Netlify enquiry form
-- about.html, podcast.html, resources.html (The Journal), contact.html
+- about.html, podcast.html, resources.html (Journal), contact.html
 - ops.html — PRIVATE operations dashboard. Never link it from public pages,
   keep its `noindex` meta. It reads Netlify form submissions via API token
   and Calendly via /.netlify/functions/calendly.
