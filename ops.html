@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Operations Desk | Inner Narrative Coach</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2026092602">
+  <link rel="stylesheet" href="css/style.css?v=2026092603">
   <link rel="icon" type="image/png" href="images/logo-akv.png?v=2026042003">
   <style>
     body { background: var(--bg-warm); }
@@ -225,8 +225,9 @@
   /* ---------- journal links per offer, for value-first follow-ups ---------- */
   var GIFT = {
     "Archetypal Reading": SITE + "/resources.html#epigenetics",
-    "Threshold Package": SITE + "/resources.html#epigenetics",
-    "The Journey": SITE + "/resources.html#art-messages",
+    "1:1 Coaching": SITE + "/resources.html#epigenetics",
+    "Deep Dive Package": SITE + "/resources.html#epigenetics",
+    "Deep Transformation Package": SITE + "/resources.html#art-messages",
     "Fantasy Portraits": SITE + "/resources.html",
     "Teams / Workshops": SITE + "/resources.html",
     "Group Circle Waitlist": SITE + "/resources.html"
@@ -564,7 +565,7 @@
 
   /* ---------- playbook templates listing ---------- */
   function renderTemplates(){
-    var demo = { name: '{first name}', email: '{email}', data: { archetype: 'The Sage', offers: 'Threshold Package', organisation: '{organisation}', format: 'Workshop (half day)', source: 'index.html' }, form: '' };
+    var demo = { name: '{first name}', email: '{email}', data: { archetype: 'The Sage', offers: 'Deep Dive Package', organisation: '{organisation}', format: 'Workshop (half day)', source: 'index.html' }, form: '' };
     var items = [
       ['Quiz result reply (sent within 24h)', tplQuiz(Object.assign({}, demo, {form:'quiz-results'}))],
       ['Interest acknowledgement (sent within 24h)', tplInterest(Object.assign({}, demo, {form:'offer-interest'}))],

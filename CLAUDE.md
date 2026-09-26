@@ -37,10 +37,12 @@ always the next step down the spine.
 
 - index.html — homepage, Reading-first hero
 - the-reading.html — flagship sales page
-- work-with-me.html — packages: Threshold S$1,290 (flagship), Journey S$2,890,
-  Reading standalone S$489, Continuing coaching S$220/hr (graduates only).
+- work-with-me.html — services (owner's own copy, keep wording): Archetypal
+  Reading S$489 (signature "Vaudour Method"; delivers Archetypal Evaluation,
+  Archetypal Map, custom fantasy portrait), 1:1 Coaching S$220/60 min (public,
+  owner's decision), Deep Dive Package S$1,100 (1 Reading + 3 coaching
+  sessions, "Recommended"), Deep Transformation Package S$2,100 (10 sessions).
   Fantasy Portraits: Mini S$188 / Signature S$376 / Premium S$655.
-  NO public hourly pricing for new clients — this is deliberate strategy.
 - call.html — discovery call (20 min, free), Calendly embed
   (calendly.com/annevaudour/30min, stock inline snippet — keep it stock,
   custom params previously broke it)

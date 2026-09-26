@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2026092602">
+  <link rel="stylesheet" href="css/style.css?v=2026092603">
   <link rel="icon" type="image/png" href="images/logo-akv.png?v=2026042003">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Register Your Interest">
@@ -83,8 +83,9 @@
 
         <h3 style="margin-bottom:1rem">What's calling you?</h3>
         <label class="check-row"><input type="checkbox" name="offers" value="Archetypal Reading" id="opt-reading"><span><strong>The Archetypal Reading</strong><span class="check-sub">The 90-minute flagship session with Map, Snapshot card, and Portrait &middot; S$489</span></span></label>
-        <label class="check-row"><input type="checkbox" name="offers" value="Threshold Package" id="opt-threshold"><span><strong>The Threshold Package</strong><span class="check-sub">Reading + three coaching sessions + a second Portrait &middot; S$1,290</span></span></label>
-        <label class="check-row"><input type="checkbox" name="offers" value="The Journey" id="opt-journey"><span><strong>The Journey</strong><span class="check-sub">Reading + eight coaching sessions + two Portraits &middot; S$2,890</span></span></label>
+        <label class="check-row"><input type="checkbox" name="offers" value="1:1 Coaching" id="opt-coaching"><span><strong>1:1 Coaching</strong><span class="check-sub">Single 60-minute sessions around a specific challenge, transition or pattern &middot; S$220</span></span></label>
+        <label class="check-row"><input type="checkbox" name="offers" value="Deep Dive Package" id="opt-deepdive"><span><strong>Deep Dive Package</strong><span class="check-sub">1 Archetypal Reading + 3 follow-up coaching sessions &middot; S$1,100</span></span></label>
+        <label class="check-row"><input type="checkbox" name="offers" value="Deep Transformation Package" id="opt-transformation"><span><strong>Deep Transformation Package</strong><span class="check-sub">10 private coaching sessions for sustained inner work &middot; S$2,100</span></span></label>
         <label class="check-row"><input type="checkbox" name="offers" value="Fantasy Portraits" id="opt-portraits"><span><strong>Fantasy Portrait collections</strong><span class="check-sub">Mini, Signature, or Premium fine art portrait sets &middot; from S$188</span></span></label>
         <label class="check-row"><input type="checkbox" name="offers" value="Teams / Workshops" id="opt-teams"><span><strong>A workshop or keynote for my team</strong><span class="check-sub">Lectures, workshops, and offsite facilitation for organisations</span></span></label>
         <label class="check-row"><input type="checkbox" name="offers" value="Group Circle Waitlist" id="opt-circle"><span><strong>The Archetypal Circle <span class="badge" style="vertical-align:2px">Waitlist</span></strong><span class="check-sub">A small-group program in the making: six people, eight weeks of archetypal work together. Join the waitlist and shape it.</span></span></label>
@@ -150,7 +151,7 @@
     (function(){
       var q = new URLSearchParams(location.search);
       // Pre-check the offer the visitor came from
-      var map = { reading: 'opt-reading', threshold: 'opt-threshold', journey: 'opt-journey', portraits: 'opt-portraits', teams: 'opt-teams', circle: 'opt-circle' };
+      var map = { reading: 'opt-reading', coaching: 'opt-coaching', deepdive: 'opt-deepdive', transformation: 'opt-transformation', threshold: 'opt-deepdive', journey: 'opt-transformation', portraits: 'opt-portraits', teams: 'opt-teams', circle: 'opt-circle' };
       var offer = q.get('offer');
       if (offer && map[offer]) {
         var box = document.getElementById(map[offer]);

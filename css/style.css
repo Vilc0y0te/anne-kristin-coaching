@@ -1251,3 +1251,6 @@ strong { font-weight: 600; color: var(--text); }
   .swan-quote { font-size: 1.15rem; margin-bottom: 1rem; }
   .swan-text p { font-size: 0.92rem; line-height: 1.55; }
 }
+
+/* Multi-paragraph service descriptions */
+.pkg-row .pkg-note + .pkg-note { margin-top: 0.65rem; }
