@@ -313,13 +313,6 @@ strong { font-weight: 600; color: var(--text); }
   width: 100%;
   display: block;
 }
-@media (min-width: 769px) {
-  .swan-img img {
-    aspect-ratio: 2 / 1;
-    object-fit: cover;
-    object-position: center top;
-  }
-}
 .swan-text {
   position: absolute;
   top: 0;
