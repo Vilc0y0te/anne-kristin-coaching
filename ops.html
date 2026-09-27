@@ -68,7 +68,7 @@
       <button class="ops-tab" data-tab="newsletter">Newsletter</button>
       <button class="ops-tab" data-tab="playbook">Playbook</button>
     </nav>
-    <button class="btn btn-accent btn-sm" id="refreshBtn">Refresh</button>
+    <div style="display:flex;gap:0.5rem"><button class="btn btn-ghost btn-sm" id="settingsBtn" style="color:#fff;border-color:rgba(255,255,255,0.35)">Settings</button><button class="btn btn-accent btn-sm" id="refreshBtn">Refresh</button></div>
   </div>
 </header>
 
@@ -78,7 +78,7 @@
   <div class="ops-card" id="setupCard">
     <h2>One-time setup (3 minutes)</h2>
     <ol class="setup-steps" style="padding-left:1.25rem;list-style:decimal">
-      <li><b>Create a Netlify access token:</b> open <a href="https://app.netlify.com/user/applications#personal-access-tokens" target="_blank" rel="noopener">app.netlify.com &rarr; User settings &rarr; Applications &rarr; Personal access tokens</a>, click <b>New access token</b>, name it "Ops Desk", copy it.</li>
+      <li><b>Create a Netlify access token:</b> open <a href="https://app.netlify.com/user/applications#personal-access-tokens" target="_blank" rel="noopener">app.netlify.com &rarr; User settings &rarr; Applications &rarr; Personal access tokens</a>, click <b>New access token</b>, name it "Ops Desk", pick the <b>longest expiry offered</b>, copy it. <em>Renewing an expired token? Same steps, then paste the new one below; your notes and statuses are kept.</em></li>
       <li><b>Paste it below.</b> It is stored only in this browser, never sent anywhere except Netlify's own API.</li>
       <li><b>Turn on instant email notifications</b> (so you're pinged without opening this page): Netlify &rarr; your site &rarr; <b>Forms &rarr; Notifications &rarr; Add notification &rarr; Email</b>, to annek.vaudour@gmail.com. Do it once per form: newsletter, quiz-results, offer-interest, team-enquiry.</li>
     </ol>
@@ -640,6 +640,11 @@
     }
   });
   document.getElementById('refreshBtn').addEventListener('click', refresh);
+  document.getElementById('settingsBtn').addEventListener('click', function(){
+    var c = document.getElementById('setupCard');
+    c.style.display = c.style.display === 'none' ? 'block' : 'none';
+    if (c.style.display === 'block') { document.getElementById('tokenInput').focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
   document.getElementById('saveToken').addEventListener('click', function(){
     var v = document.getElementById('tokenInput').value.trim();
     var k = document.getElementById('opsKeyInput').value.trim();
