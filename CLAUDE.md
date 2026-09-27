@@ -30,7 +30,7 @@ offending commit (never force-push history away), push, confirm.
 ## Site map and funnel (do not break this logic)
 
 The site is a sales funnel with one spine:
-quiz/Letter (cold) → discovery call (call.html) → Archetypal Reading
+quiz/Letter (cold) → Let's Connect message (call.html) → Archetypal Reading
 (the-reading.html, S$489 flagship) → packages (work-with-me.html).
 Teams track runs separately (for-teams.html). Every page has ONE primary CTA,
 always the next step down the spine.
@@ -43,9 +43,10 @@ always the next step down the spine.
   owner's decision), Deep Dive Package S$1,100 (1 Reading + 3 coaching
   sessions, "Recommended"), Deep Transformation Package S$2,100 (10 sessions).
   Fantasy Portraits: Mini S$188 / Signature S$376 / Premium S$655.
-- call.html — discovery call (20 min, free), Calendly embed
-  (calendly.com/annevaudour/30min, stock inline snippet — keep it stock,
-  custom params previously broke it)
+- call.html — "Let's Connect" page: Netlify form `lets-connect` (Full Name,
+  Email, WhatsApp optional, "What would you like to talk about?"). The owner
+  removed Calendly on purpose: people reach her by form, WhatsApp or email.
+  Do not reintroduce a booking widget. All "Let's Connect" buttons link here.
 - quiz.html — 12-question archetype quiz, in-browser scoring
 - archetypes.html + archetype-*.html — 12-archetype library (generated set;
   keep structure consistent across all 12 when editing one)
@@ -55,19 +56,17 @@ always the next step down the spine.
 - about.html, podcast.html, resources.html (Journal), contact.html
 - ops.html — PRIVATE operations dashboard. Never link it from public pages,
   keep its `noindex` meta. It reads Netlify form submissions via API token
-  and Calendly via /.netlify/functions/calendly.
+
 
 ## Couplings that break silently — check before renaming anything
 
 - Netlify form names are load-bearing: `newsletter`, `quiz-results`,
-  `offer-interest`, `team-enquiry`. ops.html's FORMS array and the Netlify
+  `offer-interest`, `team-enquiry`, `lets-connect`. ops.html's FORMS array and the Netlify
   dashboard notifications depend on these exact names.
 - The nav, footer, newsletter band ("The Inner Letter"), and WhatsApp float
   are duplicated in every HTML file. A change to any of them must be applied
   to ALL pages (script it with Python; don't hand-edit 25 files).
-- netlify/functions/calendly.mjs needs env vars CALENDLY_TOKEN and OPS_KEY
-  set in Netlify; never hardcode secrets in the repo.
-- netlify.toml: publish ".", functions in netlify/functions, 404 → index.html.
+- netlify.toml: publish ".", 404 → index.html.
 
 ## Conventions
 
@@ -94,4 +93,4 @@ always the next step down the spine.
 
 - Owner email: annek.vaudour@gmail.com (appears on contact page and in ops
   templates). Netlify hosts the site; forms and their notifications are
-  configured in the Netlify dashboard. Calendly: calendly.com/annevaudour.
+  configured in the Netlify dashboard.

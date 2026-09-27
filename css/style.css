@@ -1254,3 +1254,7 @@ strong { font-weight: 600; color: var(--text); }
 
 /* Multi-paragraph service descriptions */
 .pkg-row .pkg-note + .pkg-note { margin-top: 0.65rem; }
+
+/* Let's Connect form labels */
+.field-label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--text); margin: 0 0 0.35rem; }
+.field-optional { font-weight: 400; color: var(--text-light); }

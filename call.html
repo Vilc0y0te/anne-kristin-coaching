@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>document.documentElement.classList.remove('no-js')</script>
-  <meta name="description" content="Book a free 20-minute discovery call with Anne-Kristin Vaudour, an honest conversation about whether an Archetypal Reading or coaching package is the right fit.">
-  <title>Book a Discovery Call | Anne-Kristin Vaudour</title>
+  <meta name="description" content="Get in touch with Anne-Kristin Vaudour: tell me what you would like to talk about and I will reply personally, by email or WhatsApp.">
+  <title>Let's Connect | Anne-Kristin Vaudour</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2026092603">
+  <link rel="stylesheet" href="css/style.css?v=2026092701">
   <link rel="icon" type="image/png" href="images/logo-akv.png?v=2026042003">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Book a Discovery Call">
-  <meta property="og:description" content="Twenty minutes, free, no obligation. An honest conversation about the right starting point.">
+  <meta property="og:title" content="Let's Connect">
+  <meta property="og:description" content="Tell me what you would like to talk about. I reply personally, by email or WhatsApp.">
   <meta property="og:image" content="https://innernarrativecoach.org/images/home-hero.jpg">
 </head>
 <body>
@@ -38,7 +38,7 @@
           <a href="about.html" class="nav-link">About</a>
           <a href="resources.html" class="nav-link">Journal</a>
         </div>
-        <a href="call.html" class="btn btn-accent nav-cta">Book a Call</a>
+        <a href="call.html" class="btn btn-accent nav-cta">Let's Connect</a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -51,7 +51,7 @@
       <a href="about.html" class="nav-link">About</a>
       <a href="resources.html" class="nav-link">Journal</a>
       <a href="podcast.html" class="nav-link">Podcast</a>
-      <a href="call.html" class="nav-link">Book a Call</a>
+      <a href="call.html" class="nav-link">Let's Connect</a>
     </div>
   </nav>
 
@@ -60,35 +60,48 @@
   <!-- ====== PAGE HERO ====== -->
   <header class="page-hero">
     <div class="container">
-      <span class="label">Free &middot; 20 Minutes &middot; Zoom &middot; EN &middot; DE &middot; IT</span>
-      <h1>Twenty minutes, no obligation</h1>
-      <p class="page-hero-sub">Tell me where you are and what you're navigating. I'll tell you honestly whether a Reading, a package, or something else entirely is the right fit, and if we're not a match, I'll point you to someone who is.</p>
+      <span class="label">No Obligation &middot; EN &middot; DE &middot; IT</span>
+      <h1>Let's Connect</h1>
+      <p class="page-hero-sub">Tell me a little about where you are and what you're navigating. I read every message myself and will reply personally, by email or WhatsApp, usually within a day or two.</p>
     </div>
   </header>
 
   <!-- ====== SCHEDULER ====== -->
   <section class="section-padded bg-warm">
     <div class="container container-narrow">
-      <!-- Calendly inline widget begin -->
-      <div class="calendly-inline-widget" data-url="https://calendly.com/annevaudour/30min" style="min-width:320px;height:700px;"></div>
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <!-- Calendly inline widget end -->
-      <p class="text-center" style="margin-top:2rem;font-size:0.8rem">Trouble with the calendar, or rather write first? <a href="https://wa.me/6598860234?text=Hi%20Anne%2C%20I%27d%20like%20to%20book%20a%20free%20discovery%20call." target="_blank" rel="noopener">Message me on WhatsApp instead</a> &middot; <a href="https://calendly.com/annevaudour/30min" target="_blank" rel="noopener">or open the booking page directly</a>.</p>
+      <form name="lets-connect" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/call.html?sent=1" style="max-width:560px;margin:0 auto" id="connectForm">
+        <input type="hidden" name="form-name" value="lets-connect">
+        <p class="hidden-field"><label>Leave this empty: <input name="bot-field"></label></p>
+        <label class="field-label" for="lc-name">Full Name</label>
+        <input class="field-input" type="text" id="lc-name" name="name" autocomplete="name" required>
+        <label class="field-label" for="lc-email">Email</label>
+        <input class="field-input" type="email" id="lc-email" name="email" autocomplete="email" required>
+        <label class="field-label" for="lc-wa">WhatsApp <span class="field-optional">(optional)</span></label>
+        <input class="field-input" type="tel" id="lc-wa" name="whatsapp" autocomplete="tel" placeholder="+65 ...">
+        <label class="field-label" for="lc-msg">What would you like to talk about?</label>
+        <textarea class="field-input" id="lc-msg" name="message" rows="6" required></textarea>
+        <button type="submit" class="btn btn-accent btn-lg btn-full" style="margin-top:0.5rem">Send My Message</button>
+      </form>
+      <div id="connectSent" class="text-center" style="display:none">
+        <h2 style="margin-bottom:1rem">Thank you, your message is on its way.</h2>
+        <p style="max-width:460px;margin:0 auto">I'll reply personally, usually within a day or two. In the meantime, you might enjoy the <a href="quiz.html">archetype quiz</a> or the <a href="resources.html">Journal</a>.</p>
+      </div>
+      <p class="text-center" style="margin-top:2rem;font-size:0.85rem">Rather write directly? <a href="https://wa.me/6598860234?text=Hi%20Anne%2C%20I%27d%20love%20to%20connect." target="_blank" rel="noopener">Message me on WhatsApp</a> or email <a href="mailto:annek.vaudour@gmail.com">annek.vaudour@gmail.com</a>.</p>
     </div>
   </section>
 
   <!-- ====== WHAT IT IS / ISN'T ====== -->
   <section class="section-padded">
     <div class="container container-narrow">
-      <h2 class="section-title">What this call is, and isn't</h2>
+      <h2 class="section-title">What to expect</h2>
       <div class="cards-grid cards-2">
         <div class="card fade-up">
           <div class="card-body">
             <h3>It is</h3>
             <ul class="offer-features">
-              <li>A real conversation about where you are</li>
+              <li>A personal reply from me, not an automated one</li>
               <li>An honest recommendation, even if it isn't me</li>
-              <li>Answers to anything the site left open</li>
+              <li>Answers to anything the site left open, and a conversation if it helps</li>
             </ul>
           </div>
         </div>
@@ -97,7 +110,7 @@
             <h3>It isn't</h3>
             <ul class="offer-features">
               <li>A sales pitch</li>
-              <li>A mini coaching session</li>
+              <li>A mailing list sign-up</li>
               <li>A commitment to anything</li>
             </ul>
           </div>
@@ -149,5 +162,11 @@
   <a href="https://wa.me/6598860234?text=Hi%20Anne%2C%20I%27d%20like%20to%20book%20a%20free%20discovery%20call." target="_blank" rel="noopener" class="wa-float" aria-label="Message Anne on WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
   <script src="js/main.js?v=2026032107"></script>
+  <script>
+    if (new URLSearchParams(location.search).get('sent') === '1') {
+      document.getElementById('connectForm').style.display = 'none';
+      document.getElementById('connectSent').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
