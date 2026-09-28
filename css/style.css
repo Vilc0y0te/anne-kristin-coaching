@@ -1281,3 +1281,6 @@ strong { font-weight: 600; color: var(--text); }
 .medium-card .card-body p { margin-bottom: 1rem; }
 .medium-link { margin-top: auto; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .medium-card:hover .medium-link { color: var(--accent-hover); }
+
+/* Owner photos shown in their original colours */
+.split-img img.photo-true { filter: none; }
