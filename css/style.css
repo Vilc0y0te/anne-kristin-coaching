@@ -1258,3 +1258,7 @@ strong { font-weight: 600; color: var(--text); }
 /* Let's Connect form labels */
 .field-label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--text); margin: 0 0 0.35rem; }
 .field-optional { font-weight: 400; color: var(--text-light); }
+
+/* Homepage hero: longer single-sentence statement */
+.hero-split-content h1.hero-statement { font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height: 1.4; margin-bottom: 2rem; }
+@media (max-width: 768px) { .hero-split-content h1.hero-statement { font-size: 1.4rem; } }
