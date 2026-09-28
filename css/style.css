@@ -1293,3 +1293,15 @@ strong { font-weight: 600; color: var(--text); }
 .hero-split-ctas .btn-accent:hover,
 .cta-section .btn-accent:hover { background: #E6ECF5; border-color: #E6ECF5; color: var(--accent-hover); }
 .cta-section .label { color: rgba(255,255,255,0.7); }
+
+/* Testimonials: staggered two-column flow with initials/photo avatar */
+.testi-flow { columns: 2; column-gap: 2rem; }
+.testi-flow .testi-card { break-inside: avoid; margin: 0 0 2rem; display: block; }
+.testi-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.1rem; }
+.testi-avatar { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; font-family: var(--font-heading); font-size: 1.15rem; letter-spacing: 0.04em; object-fit: cover; }
+.testi-who { display: block; font-size: 0.95rem; margin: 0; color: var(--text); }
+.testi-ctx { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-light); margin-top: 0.15rem; }
+.testi-card blockquote { margin: 0; }
+.testi-card blockquote p { font-size: 0.9rem; font-style: italic; line-height: 1.7; margin-bottom: 0.8rem; }
+.testi-card blockquote p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .testi-flow { columns: 1; } }
