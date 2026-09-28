@@ -2,7 +2,7 @@
    INNER NARRATIVE COACH
    Modern Mysticism meets Grounded Professionalism
    Typography: Cormorant Garamond + Inter
-   Accent: Terracotta #C27A62
+   Accent: Deep navy #183B6E
    ============================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,9 +14,9 @@
   --text: #2C2C2C;
   --text-light: #6B6560;
   --text-inv: #F9F8F6;
-  --accent: #C27A62;
-  --accent-hover: #A8624C;
-  --accent-light: rgba(194,122,98,0.08);
+  --accent: #183B6E;
+  --accent-hover: #0F2A52;
+  --accent-light: rgba(24,59,110,0.08);
   --sage: #7A8B76;
   --outline: #D8D3CC;
   --outline-light: #E8E4DE;
@@ -1284,3 +1284,12 @@ strong { font-weight: 600; color: var(--text); }
 
 /* Owner photos shown in their original colours */
 .split-img img.photo-true { filter: none; }
+
+/* Navy accent on dark backgrounds: invert buttons, lighten labels */
+.hero-split .btn-accent,
+.hero-split-ctas .btn-accent,
+.cta-section .btn-accent { background: #fff; border-color: #fff; color: var(--accent); }
+.hero-split .btn-accent:hover,
+.hero-split-ctas .btn-accent:hover,
+.cta-section .btn-accent:hover { background: #E6ECF5; border-color: #E6ECF5; color: var(--accent-hover); }
+.cta-section .label { color: rgba(255,255,255,0.7); }

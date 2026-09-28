@@ -77,7 +77,9 @@ always the next step down the spine.
   message. WhatsApp is the floating bubble, never the primary CTA.
 - Languages EN · DE · IT are a differentiator; keep the chips near prices.
 - Design system: css/style.css only (no frameworks). Fonts: Cormorant
-  Garamond (headings) + Inter (body). Accent #C27A62. Breakpoints:
+  Garamond (headings) + Inter (body). Accent: deep navy #183B6E (owner's
+  colour, replaced terracotta); on dark backgrounds accent buttons invert to
+  white with navy text. Breakpoints:
   1024 / 960 / 768 / 480. Mobile is reviewed on Android Chrome; check that
   nav (80px, logo 68px; 72px/60px under 480px) and hero right-alignment hold.
 - Images live in images/, kebab-case names. When the user pastes/attaches an
