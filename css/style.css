@@ -8,18 +8,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F9F8F6;
-  --bg-warm: #F3F0EB;
+  --bg: #F6F8F9;
+  --bg-warm: #ECF0F3;
   --bg-dark: #2C2C2C;
   --text: #2C2C2C;
-  --text-light: #6B6560;
-  --text-inv: #F9F8F6;
+  --text-light: #5C666D;
+  --text-inv: #F6F8F9;
   --accent: #102D3F;
   --accent-hover: #1E4A63;
   --accent-light: rgba(16,45,63,0.08);
   --sage: #7A8B76;
-  --outline: #D8D3CC;
-  --outline-light: #E8E4DE;
+  --outline: #D0D8DE;
+  --outline-light: #E2E7EB;
   --surface: #FFFFFF;
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Inter', -apple-system, sans-serif;
