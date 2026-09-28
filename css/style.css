@@ -1270,3 +1270,6 @@ strong { font-weight: 600; color: var(--text); }
 @media (max-width: 960px) { #approach, #packages, #portraits, #reading, #deep-dive, #deep-transformation, #coaching-1-1 { scroll-margin-top: 128px; } }
 @media (max-width: 480px) { #approach, #packages, #portraits, #reading, #deep-dive, #deep-transformation, #coaching-1-1 { scroll-margin-top: 116px; } }
 @media (max-width: 768px) { .approach-text .approach-close { font-size: 1.15rem; } }
+
+/* Quiz invitation inside the Archetypal Reading card */
+.pkg-row .reading-quiz { margin-top: 1rem !important; padding: 0.85rem 1rem; background: var(--surface); border-left: 2px solid var(--accent); border-radius: var(--radius); font-style: italic; }
