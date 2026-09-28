@@ -2,7 +2,7 @@
    INNER NARRATIVE COACH
    Modern Mysticism meets Grounded Professionalism
    Typography: Cormorant Garamond + Inter
-   Accent: Deep navy #183B6E
+   Accent: Deep petrol navy #102D3F
    ============================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,9 +14,9 @@
   --text: #2C2C2C;
   --text-light: #6B6560;
   --text-inv: #F9F8F6;
-  --accent: #183B6E;
-  --accent-hover: #0F2A52;
-  --accent-light: rgba(24,59,110,0.08);
+  --accent: #102D3F;
+  --accent-hover: #1E4A63;
+  --accent-light: rgba(16,45,63,0.08);
   --sage: #7A8B76;
   --outline: #D8D3CC;
   --outline-light: #E8E4DE;
