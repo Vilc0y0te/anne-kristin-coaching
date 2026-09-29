@@ -8,12 +8,12 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F6F8F9;
-  --bg-warm: #ECF0F3;
+  --bg: #FAF7F2;
+  --bg-warm: #F3ECE3;
   --bg-dark: #2C2C2C;
   --text: #2C2C2C;
-  --text-light: #5C666D;
-  --text-inv: #F6F8F9;
+  --text-light: #675E57;
+  --text-inv: #FAF7F2;
   --accent: #102D3F;
   --accent-hover: #1E4A63;
   --accent-light: rgba(16,45,63,0.08);
@@ -21,8 +21,8 @@
   --btn-hover: #85491F;
   --btn-line: #8F522A;
   --sage: #7A8B76;
-  --outline: #D0D8DE;
-  --outline-light: #E2E7EB;
+  --outline: #DDD0C3;
+  --outline-light: #EBE2D7;
   --surface: #FFFFFF;
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Inter', -apple-system, sans-serif;
