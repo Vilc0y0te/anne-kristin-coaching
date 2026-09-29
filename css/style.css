@@ -17,9 +17,9 @@
   --accent: #102D3F;
   --accent-hover: #1E4A63;
   --accent-light: rgba(16,45,63,0.08);
-  --btn: #A0602F;
-  --btn-hover: #85491F;
-  --btn-line: #8F522A;
+  --btn: #8A3B27;
+  --btn-hover: #6E2E1E;
+  --btn-line: #8A3B27;
   --sage: #7A8B76;
   --outline: #DDD0C3;
   --outline-light: #EBE2D7;
@@ -1291,10 +1291,10 @@ strong { font-weight: 600; color: var(--text); }
 /* Copper buttons on dark backgrounds: keep copper, add a light copper edge so the shape reads */
 .hero-split .btn-accent,
 .hero-split-ctas .btn-accent,
-.cta-section .btn-accent { background: var(--btn); border-color: #D9A273; color: #fff; }
+.cta-section .btn-accent { background: var(--btn); border-color: #D7957C; color: #fff; }
 .hero-split .btn-accent:hover,
 .hero-split-ctas .btn-accent:hover,
-.cta-section .btn-accent:hover { background: var(--btn-hover); border-color: #E3B48C; color: #fff; }
+.cta-section .btn-accent:hover { background: var(--btn-hover); border-color: #E2AC96; color: #fff; }
 .cta-section .label { color: rgba(255,255,255,0.7); }
 
 /* Testimonials: staggered two-column flow with initials/photo avatar */

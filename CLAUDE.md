@@ -78,9 +78,9 @@ always the next step down the spine.
 - Languages EN · DE · IT are a differentiator; keep the chips near prices.
 - Design system: css/style.css only (no frameworks). Fonts: Cormorant
   Garamond (headings) + Inter (body). Accent: deep petrol navy #102D3F for labels,
-  links, badges, newsletter band. Buttons are warm copper (--btn #A0602F,
-  hover #85491F, outline buttons #8F522A for contrast), matching the copper logo; on dark backgrounds copper buttons
-  get a light copper edge (#D9A273). Breakpoints:
+  links, badges, newsletter band. Buttons are deep copper (--btn #8A3B27,
+  hover #6E2E1E, outline buttons same #8A3B27), matching the copper logo; on dark backgrounds copper buttons
+  get a light copper edge (#D7957C). Breakpoints:
   1024 / 960 / 768 / 480. Mobile is reviewed on Android Chrome; check that
   nav (80px, logo 68px; 72px/60px under 480px) and hero right-alignment hold.
 - Images live in images/, kebab-case names. When the user pastes/attaches an
