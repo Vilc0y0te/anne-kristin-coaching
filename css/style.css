@@ -1331,3 +1331,11 @@ strong { font-weight: 600; color: var(--text); }
   .quiz-feature { flex-direction: column; gap: 1.75rem; text-align: center; }
   .quiz-thumb { width: 200px; height: 200px; }
 }
+
+/* Fantasy Portraits gallery: uniform square tiles */
+.portrait-gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 0 0 3rem; }
+.portrait-gallery img { flex: 0 0 calc((100% - 4rem) / 5); width: calc((100% - 4rem) / 5); aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: var(--radius); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+@media (max-width: 768px) {
+  .portrait-gallery { gap: 0.75rem; }
+  .portrait-gallery img { flex-basis: calc((100% - 0.75rem) / 2); width: calc((100% - 0.75rem) / 2); }
+}
