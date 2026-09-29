@@ -1356,3 +1356,5 @@ strong { font-weight: 600; color: var(--text); }
 }
 .pkg-row .pkg-portrait-link { margin: 1rem 0 0; }
 .pkg-row .pkg-portrait-link .btn { padding: 0.6rem 1.2rem; font-size: 0.72rem; }
+.hero-split-content p.hero-name { font-family: var(--font-body, Inter, sans-serif); font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; color: #D7957C; margin: 0 0 1.6rem; }
+@media (max-width: 768px) { .hero-split-content p.hero-name { font-size: 0.75rem; margin-bottom: 1.2rem; } }
