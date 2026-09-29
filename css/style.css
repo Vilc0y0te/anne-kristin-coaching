@@ -601,6 +601,9 @@ strong { font-weight: 600; color: var(--text); }
 .cards-grid { display: grid; gap: 2rem; }
 .cards-grid.cards-3 { grid-template-columns: repeat(3, 1fr); }
 .cards-grid.cards-2 { grid-template-columns: repeat(2, 1fr); }
+.cards-grid.cards-4 { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+@media (max-width: 1024px) { .cards-grid.cards-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .cards-grid.cards-4 { grid-template-columns: 1fr; gap: 1.25rem; } }
 .card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--outline-light); overflow: hidden; transition: all var(--transition); display: flex; flex-direction: column; }
 .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
 .card--dark { background: var(--bg-dark); border-color: transparent; }
