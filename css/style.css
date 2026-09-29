@@ -1354,3 +1354,5 @@ strong { font-weight: 600; color: var(--text); }
   .portrait-feature-img img { width: 220px; height: 220px; }
   .gallery-dialog { padding: 1rem; }
 }
+.pkg-row .pkg-portrait-link { margin: 1rem 0 0; }
+.pkg-row .pkg-portrait-link .btn { padding: 0.6rem 1.2rem; font-size: 0.72rem; }
