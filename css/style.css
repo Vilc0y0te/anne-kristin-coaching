@@ -1305,3 +1305,13 @@ strong { font-weight: 600; color: var(--text); }
 .testi-card blockquote p { font-size: 0.9rem; font-style: italic; line-height: 1.7; margin-bottom: 0.8rem; }
 .testi-card blockquote p:last-child { margin-bottom: 0; }
 @media (max-width: 768px) { .testi-flow { columns: 1; } }
+
+/* Homepage hero: italic statement + smaller upright follow-on line */
+.hero-split-content h1.hero-statement { font-size: clamp(1.8rem, 2.9vw, 2.6rem); line-height: 1.3; margin-bottom: 1.1rem; }
+.hero-split-content h1.hero-statement em { font-style: italic; }
+.hero-split-content p.hero-sub { font-family: var(--font-heading); font-style: normal; font-size: clamp(1.15rem, 1.7vw, 1.45rem); line-height: 1.45; color: rgba(255,255,255,0.85); margin-bottom: 2rem; }
+.hero-split-content .hero-langs { color: rgba(255,255,255,0.6); letter-spacing: 0.25em; }
+@media (max-width: 768px) {
+  .hero-split-content h1.hero-statement { font-size: 1.6rem; }
+  .hero-split-content p.hero-sub { font-size: 1.1rem; }
+}
