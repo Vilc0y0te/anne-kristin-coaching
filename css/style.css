@@ -1318,3 +1318,16 @@ strong { font-weight: 600; color: var(--text); }
   .hero-split-content h1.hero-statement { font-size: 1.6rem; }
   .hero-split-content p.hero-sub { font-size: 1.1rem; }
 }
+
+/* Homepage: Where to begin, single quiz feature with round thumbnail */
+.quiz-feature { display: flex; align-items: center; gap: 3rem; justify-content: center; }
+.quiz-thumb-link { flex: 0 0 auto; border-radius: 50%; }
+.quiz-thumb { width: 240px; height: 240px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 0 0 6px var(--surface), 0 0 0 7px var(--outline); transition: transform var(--transition); }
+.quiz-thumb-link:hover .quiz-thumb { transform: scale(1.03); }
+.quiz-feature-text { max-width: 380px; }
+.quiz-feature-text h3 { margin: 0.4rem 0 0.6rem; }
+.quiz-feature-text p { margin-bottom: 1.4rem; }
+@media (max-width: 640px) {
+  .quiz-feature { flex-direction: column; gap: 1.75rem; text-align: center; }
+  .quiz-thumb { width: 200px; height: 200px; }
+}
