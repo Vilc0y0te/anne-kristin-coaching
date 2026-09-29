@@ -43,6 +43,10 @@ always the next step down the spine.
   owner's decision), Deep Dive Package S$1,100 (1 Reading + 3 coaching
   sessions, "Recommended"), Deep Transformation Package S$2,100 (10 sessions).
   Fantasy Portraits: Mini S$188 / Signature S$376 / Premium S$655.
+  The #portraits section shows ONE featured portrait in a circle plus a
+  "Gallery" button opening a <dialog> (#portraitGallery). To add a portrait:
+  crop square, 900x900, save as images/fantasy-portrait-gallery-N.jpg and add
+  an <img> line inside the dialog's .portrait-gallery grid.
 - call.html — "Let's Connect" page: Netlify form `lets-connect` (Full Name,
   Email, WhatsApp optional, "What would you like to talk about?"). The owner
   removed Calendly on purpose: people reach her by form, WhatsApp or email.

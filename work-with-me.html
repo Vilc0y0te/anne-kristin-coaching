@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2026092909">
+  <link rel="stylesheet" href="css/style.css?v=2026092910">
   <link rel="icon" type="image/png" href="images/logo-akv-copper-v2.png?v=2026092907">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Work With Me">
@@ -222,19 +222,37 @@
         <p>Because sometimes, to know who you are, you first have to see the myth within you.</p>
       </div>
 
-      <div class="portrait-gallery fade-up" aria-label="Archetypal Fantasy Portrait gallery">
-        <img src="images/fantasy-portrait-gallery-1.jpg" alt="Archetypal Fantasy Portrait example 1" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-2.jpg" alt="Archetypal Fantasy Portrait example 2" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-3.jpg" alt="Archetypal Fantasy Portrait example 3" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-4.jpg" alt="Archetypal Fantasy Portrait example 4" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-5.jpg" alt="Archetypal Fantasy Portrait example 5" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-6.jpg" alt="Archetypal Fantasy Portrait: a queen seated on a carved throne" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-7.jpg" alt="Archetypal Fantasy Portrait: a horned forest figure holding a flame" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-8.jpg" alt="Archetypal Fantasy Portrait: a feline lady in a feathered turban" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-9.jpg" alt="Archetypal Fantasy Portrait: a woman holding a crystal orb in an ancient forest" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-10.jpg" alt="Archetypal Fantasy Portrait: a feline lady in violet feathers with a fan" width="900" height="900" loading="lazy">
-        <img src="images/fantasy-portrait-gallery-11.jpg" alt="Archetypal Fantasy Portrait: an antlered woman meeting her reflection in a forest mirror" width="900" height="900" loading="lazy">
+      <div class="portrait-feature fade-up">
+        <button type="button" class="portrait-feature-img" data-gallery-open aria-label="Open the portrait gallery">
+          <img src="images/fantasy-portrait-gallery-12.jpg" alt="Archetypal Fantasy Portrait: an ice queen in a crystal crown" width="900" height="900" loading="lazy">
+        </button>
+        <button type="button" class="btn btn-outline" data-gallery-open>Gallery</button>
       </div>
+
+      <dialog class="gallery-dialog" id="portraitGallery" aria-label="Archetypal Fantasy Portrait gallery">
+        <div class="gallery-dialog-head">
+          <h3>Gallery</h3>
+          <button type="button" class="gallery-close" data-gallery-close aria-label="Close gallery">&times;</button>
+        </div>
+        <div class="portrait-gallery">
+          <img src="images/fantasy-portrait-gallery-12.jpg" alt="Archetypal Fantasy Portrait: an ice queen in a crystal crown" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-1.jpg" alt="Archetypal Fantasy Portrait 1" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-2.jpg" alt="Archetypal Fantasy Portrait 2" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-3.jpg" alt="Archetypal Fantasy Portrait 3" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-4.jpg" alt="Archetypal Fantasy Portrait 4" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-5.jpg" alt="Archetypal Fantasy Portrait 5" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-6.jpg" alt="Archetypal Fantasy Portrait: a queen seated on a carved throne" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-7.jpg" alt="Archetypal Fantasy Portrait: a horned forest figure holding a flame" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-8.jpg" alt="Archetypal Fantasy Portrait: a feline lady in a feathered turban" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-9.jpg" alt="Archetypal Fantasy Portrait: a woman holding a crystal orb in an ancient forest" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-10.jpg" alt="Archetypal Fantasy Portrait: a feline lady in violet feathers with a fan" width="900" height="900" loading="lazy">
+          <img src="images/fantasy-portrait-gallery-11.jpg" alt="Archetypal Fantasy Portrait: an antlered woman meeting her reflection in a forest mirror" width="900" height="900" loading="lazy">
+        </div>
+        <div class="gallery-zoom" hidden>
+          <button type="button" class="gallery-close" data-zoom-close aria-label="Back to gallery">&times;</button>
+          <img src="" alt="">
+        </div>
+      </dialog>
 
       <div class="cards-grid cards-3">
         <div class="card fade-up">
@@ -371,6 +389,25 @@
       window.addEventListener('scroll', function(){ update(); autohide(); }, { passive: true });
       window.addEventListener('resize', update);
       update();
+    })();
+  </script>
+  <script>
+    (function(){
+      var dlg = document.getElementById('portraitGallery');
+      if (!dlg || !dlg.showModal) return;
+      var zoom = dlg.querySelector('.gallery-zoom'), zimg = zoom.querySelector('img');
+      function closeZoom(){ zoom.hidden = true; zimg.src = ''; }
+      document.querySelectorAll('[data-gallery-open]').forEach(function(b){
+        b.addEventListener('click', function(){ closeZoom(); dlg.showModal(); document.body.style.overflow = 'hidden'; });
+      });
+      dlg.querySelector('[data-gallery-close]').addEventListener('click', function(){ dlg.close(); });
+      dlg.querySelector('[data-zoom-close]').addEventListener('click', closeZoom);
+      zoom.addEventListener('click', function(e){ if (e.target === zoom) closeZoom(); });
+      dlg.addEventListener('close', function(){ document.body.style.overflow = ''; closeZoom(); });
+      dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+      dlg.querySelectorAll('.portrait-gallery img').forEach(function(img){
+        img.addEventListener('click', function(){ zimg.src = img.src; zimg.alt = img.alt; zoom.hidden = false; });
+      });
     })();
   </script>
 </body>
